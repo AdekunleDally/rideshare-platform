@@ -1,43 +1,102 @@
-# RideShare Multi-Region Platform
+# RideShare Platform
 
-This repository documents and implements the migration of the RideShare
-application from a single-region Kubernetes deployment to a multi-region
-Amazon EKS platform.
+> Engineering the evolution of a cloud-native RideShare application from a
+> single-region Kubernetes deployment to a production-oriented, multi-region
+> platform built on managed AWS services and Platform Engineering principles.
 
-## Regions and clusters
+## Overview
 
-| Role | AWS region | EKS cluster |
-|---|---|---|
-| Primary | us-east-2 | lukman-rideshare-cluster |
-| Secondary | us-east-1 | faahidah-rideshare-cluster |
+RideShare Platform documents the engineering evolution of an existing
+cloud-native RideShare application.
 
-## Architecture evolution
+The project begins with a single-region Amazon EKS deployment using
+CloudNativePG and the Redis Operator as the engineering baseline and
+incrementally evolves the platform into a standardised, production-oriented,
+multi-region architecture through managed AWS services, platform governance,
+deployment automation and operational excellence.
 
-### Current state
+Rather than rebuilding the application from scratch, the project demonstrates
+how an existing cloud-native platform can be systematically modernised through
+successive engineering initiatives.
 
-- Single regional ingress endpoint
-- Application deployed to one primary EKS cluster
-- PostgreSQL managed by CloudNativePG
-- Redis managed by a Kubernetes Redis Operator
-- Persistent storage provided through Amazon EBS
+## Engineering Evolution
 
-### Target state
+Single-Region Platform
 
-- Two regional Amazon EKS clusters
-- One global application hostname
-- Amazon Route 53 health-aware routing
+↓
+
+Multi-Region Platform
+
+↓
+
+Platform Governance
+
+↓
+
+Managed AWS Services
+
+↓
+
+Platform Automation
+
+↓
+
+Operations & Reliability
+
+## Engineering Baseline
+
+The engineering baseline consists of:
+
+- Single Amazon EKS cluster
+- CloudNativePG
+- Redis Operator
+- NGINX Ingress Controller
+- cert-manager
+- External Secrets Operator
+- Helm
+- Amazon ECR
+
+## Engineering Vision
+
+The target platform consists of:
+
+- Two standardized Amazon EKS clusters
 - Amazon RDS for PostgreSQL
 - Amazon ElastiCache for Redis
-- Application deployed consistently using one Helm chart
-- External Secrets Operator integrated with AWS Secrets Manager
+- Route 53 global traffic management
+- Platform governance
+- Deployment automation
+- Observability
+- Operational controls
+- Disaster Recovery
 
-## Project status
+## Platform Evolution Roadmap
 
-Current engineering phase: Phase 0 — Architecture and Platform Design
+| Phase | Objective | Status |
+|--------|-----------|--------|
+| Phase 0 | Architecture & Strategy | 🚧 In Progress |
+| Phase 1 | Platform Governance | ⏳planned |
+| Phase 2 | Platform Evolution |  ⏳planned |
+| Phase 3 | Platform Automation | ⏳ Planned |
+| Phase 4 | Platform Operations & Reliability | ⏳ Planned |
 
 ## Documentation
 
-- [Current architecture](docs/architecture/current-state/README.md)
-- [Target architecture](docs/architecture/target-state/README.md)
-- [Migration plan](docs/architecture/migration/migration-plan.md)
-- [Success criteria](docs/project/success-criteria.md)
+### Architecture
+
+- Current-State Architecture
+- Target-State Architecture
+- Platform Evolution Roadmap
+- Architecture Decision Records
+
+### Project
+
+- Scope
+- Success Criteria
+- Execution Roadmap
+
+### Platform
+
+- Platform Standards
+- Cloud Conventions
+- Platform Inventory

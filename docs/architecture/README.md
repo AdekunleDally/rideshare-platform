@@ -2,101 +2,78 @@
 
 ## Overview
 
-This directory contains the architectural documentation for the RideShare
+This directory contains the architecture documentation for the RideShare
 Platform.
 
-The objective of the platform is to evolve the RideShare application from a
-single-region Kubernetes deployment into a highly available, multi-region
-platform built on AWS managed services and Amazon EKS.
+The platform is being evolved from a single-region Kubernetes deployment into a
+standardised, multi-region platform running on Amazon EKS and supported by
+managed AWS services.
 
-The architecture documentation explains **why** the platform is designed the
-way it is before describing **how** it is implemented.
+Rather than focusing on implementation details, these documents describe the
+architectural decisions, target design and migration strategy that guide the
+platform's evolution.
 
-Implementation details, deployment procedures and operational runbooks are
+Deployment procedures, operational runbooks and platform standards are
 documented elsewhere in the repository.
 
 ---
 
-# Architecture Goals
+# Architecture Objectives
 
-The platform has the following architectural objectives:
+The architecture has the following objectives:
 
-- Improve application availability through regional redundancy.
+- Improve application availability through multi-region deployment.
 - Reduce operational overhead by adopting managed AWS services.
-- Separate stateless workloads from stateful infrastructure.
+- Separate stateless application workloads from stateful infrastructure.
+- Standardise platform components across AWS regions.
 - Provide a single global application endpoint.
-- Standardize platform components across AWS regions.
 - Support future platform growth with minimal architectural change.
-- Document engineering decisions for future maintainers.
+- Document significant architectural decisions.
 
 ---
 
-# Current Architecture
+# Architecture at a Glance
 
-The original platform consists of a single Amazon EKS cluster hosting both the
-application workloads and supporting platform services.
+The architecture documentation is organised around three questions:
 
-Major characteristics include:
+## Where are we today?
 
-- Single Amazon EKS cluster
-- CloudNativePG for PostgreSQL
-- Redis Operator for Redis
-- NGINX Ingress Controller
-- cert-manager
-- External Secrets Operator
-- Amazon Route 53
-- Helm-based application deployments
+The **Current Architecture** documents the existing single-region platform and
+establishes the architectural baseline for the project.
 
-While this architecture is suitable for development and learning, it introduces
-regional dependency and requires the platform team to operate stateful
-infrastructure inside Kubernetes.
+Documentation:
 
-Further details can be found in:
-
-```
-current-state/
-```
-
----
-
-# Target Architecture
-
-The target platform separates application workloads from stateful services.
-
-Application workloads continue running inside Amazon EKS while stateful
-components are provided by managed AWS services.
-
-The resulting architecture consists of:
-
-- Two Amazon EKS clusters
-- Amazon RDS for PostgreSQL
-- Amazon ElastiCache for Redis
-- AWS Secrets Manager
-- External Secrets Operator
-- NGINX Ingress Controller
-- cert-manager
-- Amazon Route 53 Latency-Based Routing
-- Amazon ECR
-- Helm-based application deployment
-
-This architecture allows both regions to remain active while reducing
-operational responsibility for databases and caching infrastructure.
-
-Further details can be found in:
-
-```
-target-state/
-```
+- [Current-State Architecture](./current-state/README.md)
 
 
 ---
 
+## Where are we going?
+
+The **Target Architecture** describes the desired multi-region platform after
+the planned architectural changes have been completed.
+
+Documentation:
+- [Target-State Architecture](./target-state/README.md)
+
+---
+
+## How do we get there?
+
+The **Migration Strategy** documents the incremental changes required to evolve
+the current platform into the target architecture.
+
+Documentation:
+- [Migration Stategy](./migration/README.md)
+
+
+---
 
 # Architecture Principles
 
 The platform is designed around the following principles.
 
-## Managed Services First
+## Managed Services
 
 Where practical, operational responsibility should be delegated to managed AWS
 services rather than self-managed Kubernetes workloads.
@@ -108,125 +85,90 @@ Examples include:
 
 ---
 
-## Stateless Application Clusters
+## Stateless Kubernetes Clusters
 
-Application clusters should contain only workloads required to serve
-application traffic.
-
-Persistent state should remain external to Kubernetes wherever practical.
+Amazon EKS clusters should host application workloads and supporting platform
+components while persistent application data is provided by managed services
+where appropriate.
 
 ---
 
 ## Independent Regional Deployments
 
-Each Amazon EKS cluster should be capable of serving production traffic
-independently.
+Each regional Kubernetes cluster should be capable of serving application
+traffic independently.
 
-A failure affecting one region should not require redeployment of the remaining
-region.
+A failure affecting one AWS region should not require redeployment of the
+remaining region.
+
+---
+
+## Consistent Platform Configuration
+
+Platform components should be deployed consistently across all AWS regions.
+
+Regional differences should be limited to infrastructure-specific
+configuration rather than application behaviour.
 
 ---
 
 ## Single Public Endpoint
 
-Users should access the platform through one stable DNS name regardless of the
-AWS region serving the request.
+Users should access the application through a single DNS name( **rideshare.lukmonadeokun.com** ) regardless of the AWS region serving the request.
 
-Regional routing is an infrastructure concern rather than an application
-concern.
-
----
-
-## Infrastructure Consistency
-
-Platform components should remain as consistent as possible across all
-supported AWS regions.
-
-Differences between regions should be limited to infrastructure configuration
-rather than application behavior.
+Regional traffic management remains an infrastructure concern rather than an
+application concern.
 
 ---
 
-## Documented Engineering Decisions
+## Documented Decisions
 
-Significant architectural decisions should be documented using Architecture
-Decision Records (ADRs).
-
-The goal is to preserve engineering reasoning rather than implementation
-history.
+Architectural decisions should be captured as Architecture Decision Records
+(ADRs) to preserve the reasoning behind significant design choices.
 
 ---
 
 # Architecture Decision Records
 
-The following ADRs document the major architectural decisions made for the
-platform.
+Significant architectural decisions are documented as ADRs.
 
 | ADR | Decision |
 |------|----------|
-| ADR-001 | Use Two Regional Amazon EKS Clusters |
-| ADR-002 | Use Amazon RDS for PostgreSQL |
-| ADR-003 | Use Amazon ElastiCache for Redis |
-| ADR-004 | Use Amazon Route 53 Latency-Based Routing |
+| ADR-001 | [ Use Two Regional Amazon EKS Clusters](./decisions/ADR-001-multi-region-eks.md) |
+| ADR-002 | [ Use Amazon RDS for PostgreSQL](./decisions/ADR-002-managed-postgresql.md) |
+| ADR-003 | [ Use Amazon ElastiCache for Redis](./decisions/ADR-003-managed-redis.md) |
+| ADR-004 | [ Use Amazon Route 53 Latency-Based Routing](./decisions/ADR-004-global-dns-routing.md) |
 
-Additional ADRs should be created whenever a decision has significant
-architectural impact.
-
-
----
-
-# Migration Strategy
-
-The platform is migrated incrementally rather than rebuilt from scratch.
-
-The high-level migration sequence is:
-
-```
-Single Region
-        │
-        ▼
-Managed PostgreSQL
-        │
-        ▼
-Managed Redis
-        │
-        ▼
-Externalized Secrets
-        │
-        ▼
-Second Regional Cluster
-        │
-        ▼
-Global DNS Routing
-        │
-        ▼
-Validation
-```
-
-Detailed migration documentation is available in:
-
-```
-migration/
-```
+Future architectural decisions should be documented in the same manner.
 
 ---
 
 # Architecture Documentation Structure
 
-```
+```text
 architecture/
-
 ├── README.md
 ├── current-state/
 ├── target-state/
-├── decisions/
-│   ├── ADR-001-two-regional-eks-clusters.md
-│   ├── ADR-002-amazon-rds.md
-│   ├── ADR-003-amazon-elasticache.md
-│   └── ADR-004-route53-latency-routing.md
-|
-└── migration/
+├── migration/
+└── decisions/
 ```
+
+---
+
+# Recommended Reading Order
+
+Readers new to the project should review the documentation in the following
+order:
+
+1. [ Current State Architecture ](./current-state/README.md)
+2. [ Target State  Architecture ](./target-state/README.md)
+3. [ Migration Strategy ](./migration/README.md)
+4. [ Architecture Decision Records ](./decisions/README.md)
+
+This sequence explains the platform's starting point, its intended destination,
+the steps required to reach it and the reasoning behind the major
+architectural decisions.
 
 ---
 
@@ -243,15 +185,15 @@ This documentation is intended for:
 
 ---
 
-# Document Maintenance
+# Maintaining the Architecture Documentation
 
-Architecture documentation should be updated whenever:
+The architecture documentation should be updated whenever:
 
 - the target architecture changes;
 - a significant architectural decision is made;
-- a managed service is adopted or removed;
-- a new AWS region is introduced;
+- a managed service is adopted or replaced;
+- a new AWS region is introduced; or
 - the migration strategy changes.
 
-Implementation changes that do not affect architecture should not require
-updates to this documentation.
+Implementation changes that do not affect the overall architecture should be
+documented elsewhere in the repository.

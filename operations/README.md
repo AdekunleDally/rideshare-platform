@@ -2,52 +2,56 @@
 
 ## Overview
 
-This directory contains documentation, procedures and supporting assets used to
-operate the RideShare Platform.
+This directory contains the operational documentation required to manage the
+RideShare Platform throughout its lifecycle.
 
-Unlike the Infrastructure and Applications layers, this directory focuses on
-running the platform after it has been deployed.
-
-Its objective is to make operational activities repeatable, documented and
-consistent.
+It focuses on operating, maintaining and validating the platform after it has
+been deployed.
 
 ---
 
-# Responsibilities
+## Role in the Platform Evolution
 
-The operations layer documents activities such as:
+As the platform evolves into a production-oriented multi-region architecture,
+the Operations layer provides the procedures and operational knowledge required
+to keep the platform reliable, observable and maintainable.
+
+This layer reflects the operational maturity introduced during the final phase
+of the Platform Evolution Roadmap.
+
+---
+
+## Responsibilities
+
+The Operations layer documents activities such as:
 
 - deployment procedures;
 - rollback procedures;
-- disaster recovery;
 - backup and restore;
-- failover testing;
+- disaster recovery;
+- regional failover;
 - troubleshooting;
-- maintenance activities;
+- maintenance;
 - platform validation.
 
-Operational knowledge should be documented rather than remaining tribal
-knowledge.
+Operational knowledge should be documented rather than relying on individual
+experience.
 
 ---
 
-# Principles
+## Principles
 
 Operational procedures should be:
 
-- repeatable;
 - documented;
+- repeatable;
 - tested;
 - version controlled;
-- easy to follow under pressure.
-
-Every operational task should have a documented procedure whenever practical.
+- easy to execute during incidents.
 
 ---
 
-# Directory Structure
-
-Example:
+## Directory Structure
 
 ```text
 operations/
@@ -59,24 +63,25 @@ operations/
 └── disaster-recovery/
 ```
 
----
-
-# Relationship to Other Layers
-
-Operations consumes the Infrastructure, Platform and Applications layers.
-
-It does not define architecture or provision infrastructure.
-
-Instead, it provides the procedures required to operate those components
-throughout their lifecycle.
+The structure may evolve as operational capabilities mature.
 
 ---
 
-# Out of Scope
+## Relationship to Other Layers
 
-The operations layer does not contain:
+The Operations layer supports the Infrastructure, Platform and Applications
+layers by providing the procedures required to deploy, validate, maintain and
+recover the platform.
 
-- infrastructure provisioning code;
+It does not provision infrastructure or define platform architecture.
+
+---
+
+## Out of Scope
+
+The Operations layer does not contain:
+
+- infrastructure provisioning;
 - application source code;
-- Architecture Decision Records;
-- target architecture documentation.
+- shared platform components; or
+- architecture documentation.

@@ -2,21 +2,29 @@
 
 ## Overview
 
-This directory contains the RideShare application workloads deployed onto the
-platform.
+This directory contains the RideShare application workloads that deliver the
+platform's business capabilities.
 
-Applications implement business functionality while relying on the platform and
-infrastructure layers for networking, security, storage and runtime services.
-
-The purpose of this layer is to package and deploy application components
-without embedding infrastructure concerns into the application itself.
+Applications remain independent of the underlying infrastructure and platform
+implementation, allowing the same workloads to be deployed consistently across
+multiple Kubernetes clusters.
 
 ---
 
-# Responsibilities
+## Role in the Platform Evolution
 
-This layer contains the workloads that deliver business capabilities, including
-services such as:
+As the platform evolves from a single-region deployment to a multi-region
+architecture, this layer focuses on delivering consistent, portable and
+independently deployable application services.
+
+The evolution of the platform should require minimal changes to application
+logic.
+
+---
+
+## Responsibilities
+
+This layer contains application services such as:
 
 - frontend
 - rider-service
@@ -25,11 +33,12 @@ services such as:
 - matching-service
 - email-service
 
-Application deployment configuration also resides within this layer.
+It also contains application deployment configuration and service-specific
+documentation where appropriate.
 
 ---
 
-# Principles
+## Principles
 
 Applications should remain:
 
@@ -39,25 +48,11 @@ Applications should remain:
 - externally configurable;
 - infrastructure agnostic.
 
-Infrastructure concerns should remain outside application code.
+Infrastructure and platform concerns should remain outside application code.
 
 ---
 
-# Relationship to Other Layers
-
-Applications depend on:
-
-- Infrastructure for cloud resources.
-- Platform services for Kubernetes capabilities.
-- Operations for deployment and support procedures.
-
-Applications should not provision infrastructure or manage platform services.
-
----
-
-# Directory Structure
-
-Example:
+## Directory Structure
 
 ```text
 applications/
@@ -71,16 +66,26 @@ applications/
 ```
 
 Each application is expected to contain its own deployment artifacts and
-service-specific documentation where appropriate.
+service documentation where appropriate.
 
 ---
 
-# Out of Scope
+## Relationship to Other Layers
 
-The applications layer does not contain:
+Applications consume capabilities provided by the Infrastructure and Platform
+layers, while operational procedures are documented within the Operations
+layer.
+
+Applications should not provision infrastructure or manage shared platform
+services.
+
+---
+
+## Out of Scope
+
+The Applications layer does not contain:
 
 - infrastructure provisioning;
-- platform-wide operational procedures;
-- Architecture Decision Records;
-- AWS networking configuration;
-- shared platform services.
+- shared Kubernetes platform services;
+- operational runbooks; or
+- architecture documentation.
