@@ -19,35 +19,103 @@ Rather than rebuilding the application from scratch, the project demonstrates
 how an existing cloud-native platform can be systematically modernised through
 successive engineering initiatives.
 
+## Repository at a Glance
+
+The repository is organised into six complementary engineering areas that
+document how the RideShare platform is designed, governed, built, deployed and
+operated.
+
+```text
+                         RideShare Platform
+                                │
+                                ▼
+                     ┌─────────────────────┐
+                     │    Architecture     │
+                     │ What are we building│
+                     │     and why?        │
+                     └──────────┬──────────┘
+                                │
+                                ▼
+                     ┌─────────────────────┐
+                     │     Governance      │
+                     │ What principles and │
+                     │ standards guide us? │
+                     └──────────┬──────────┘
+                                │
+                                ▼
+              ┌─────────────────┴─────────────────┐
+              │                                   │
+              ▼                                   ▼
+   ┌─────────────────────┐             ┌─────────────────────┐
+   │   Infrastructure    │             │      Platform       │
+   │ What cloud foundation│            │ What shared platform│
+   │ supports the system? │            │ capabilities exist? │
+   └──────────┬──────────┘             └──────────┬──────────┘
+              │                                   │
+              └─────────────────┬─────────────────┘
+                                │
+                                ▼
+                     ┌─────────────────────┐
+                     │    Applications     │
+                     │ What business       │
+                     │ workloads run here? │
+                     └──────────┬──────────┘
+                                │
+                                ▼
+                     ┌─────────────────────┐
+                     │     Operations      │
+                     │ How is the platform │
+                     │ operated reliably?  │
+                     └─────────────────────┘
+```
+
+Together, these areas provide a structured view of the platform's evolution
+from a single-region Kubernetes deployment to a production-oriented,
+multi-region AWS platform.
+## Repository Structure
+
+```text
+rideshare-platform/
+│
+├── docs/
+│   ├── architecture/
+│   └── governance/
+│
+├── infrastructure/
+│
+├── platform/
+│
+├── applications/
+│
+├── operations/
+│
+├── README.md
+└── CONTRIBUTING.md
+```
+
 ## Engineering Evolution
 
-Single-Region Platform
-
-↓
-
-Multi-Region Platform
-
-↓
-
-Platform Governance
-
-↓
-
+```text
+Single-Region Kubernetes Baseline
+                ↓
+Architecture and Platform Governance
+                ↓
+Multi-Region Platform Foundation
+                ↓
 Managed AWS Services
-
-↓
-
+                ↓
 Platform Automation
+                ↓
+Operations and Reliability
 
-↓
-
-Operations & Reliability
+```
 
 ## Engineering Baseline
 
-The engineering baseline consists of:
+The project begins with an existing single-region Kubernetes platform composed
+of the following technologies and capabilities:
 
-- Single Amazon EKS cluster
+- One Amazon EKS cluster
 - CloudNativePG
 - Redis Operator
 - NGINX Ingress Controller
@@ -58,27 +126,37 @@ The engineering baseline consists of:
 
 ## Engineering Vision
 
-The target platform consists of:
+The target state is a standardised, production-oriented, multi-region AWS
+platform built around the following capabilities:
 
-- Two standardized Amazon EKS clusters
+### Cloud and Data Foundation
+
+- Two regional Amazon EKS clusters
 - Amazon RDS for PostgreSQL
 - Amazon ElastiCache for Redis
-- Route 53 global traffic management
-- Platform governance
-- Deployment automation
-- Observability
-- Operational controls
-- Disaster Recovery
+- Amazon Route 53 traffic management
+
+### Platform Engineering
+
+- Platform governance and engineering standards
+- Automated infrastructure and application delivery
+- Consistent platform capabilities across regions
+
+### Operations and Reliability
+
+- Centralised observability
+- Operational controls and runbooks
+- Resilience and disaster-recovery capabilities
 
 ## Platform Evolution Roadmap
 
 | Phase | Objective | Status |
-|--------|-----------|--------|
-| Phase 0 | Architecture & Strategy | ✅ Complete |
-| Phase 1 | Platform Governance | ⏳planned |
-| Phase 2 | Platform Evolution |  ⏳planned |
+|---|---|---|
+| Phase 0 | Architecture and Strategy | ✅ Complete |
+| Phase 1 | Platform Governance | ✅ Complete |
+| Phase 2 | Platform Evolution | ⏳ Planned |
 | Phase 3 | Platform Automation | ⏳ Planned |
-| Phase 4 | Platform Operations & Reliability | ⏳ Planned |
+| Phase 4 | Platform Operations and Reliability | ⏳ Planned |
 
 ## Documentation
 
@@ -89,14 +167,24 @@ The target platform consists of:
 - Platform Evolution Roadmap
 - Architecture Decision Records
 
-### Project
-
-- Scope
-- Success Criteria
-- Execution Roadmap
-
-### Platform
+### Governance
 
 - Platform Standards
 - Cloud Conventions
+- Repository Standards
+- Documentation Standards
 - Platform Inventory
+- Contribution Guidelines
+
+### Project Planning
+
+- Project Scope
+- Success Criteria
+- Execution Roadmap
+
+### Implementation and Operations
+
+- Infrastructure
+- Shared Platform Capabilities
+- Application Workloads
+- Operations and Reliability
