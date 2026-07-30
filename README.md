@@ -9,21 +9,49 @@
 RideShare Platform documents the engineering evolution of an existing
 cloud-native RideShare application.
 
-The project begins with a single-region Amazon EKS deployment using
-CloudNativePG and the Redis Operator as the engineering baseline and
+Beginning with a single-region Amazon EKS deployment that uses CloudNativePG
+and the Redis Operator for Kubernetes-native data services, the project
 incrementally evolves the platform into a standardised, production-oriented,
-multi-region architecture through managed AWS services, platform governance,
-deployment automation and operational excellence.
+multi-region AWS architecture through managed services, platform governance,
+infrastructure standardisation, deployment automation and operational
+excellence.
 
 Rather than rebuilding the application from scratch, the project demonstrates
 how an existing cloud-native platform can be systematically modernised through
-successive engineering initiatives.
+successive Platform Engineering initiatives.
+
+---
+
+## Engineering Baseline Repository
+
+The engineering journey documented in this repository builds upon an existing
+RideShare application that was previously implemented as a single-region
+Amazon EKS deployment.
+
+That original implementation is maintained separately in the
+**RideShare Pro** repository and serves as the engineering baseline for this
+project.
+
+The baseline repository contains the original infrastructure, Kubernetes
+platform components and application deployments from which the platform
+evolves.
+
+This repository does not duplicate that implementation. Instead, it documents
+the architectural decisions, governance standards, infrastructure evolution
+and operational practices required to transform the baseline into a
+production-oriented, multi-region AWS platform.
+
+**Engineering Baseline Repository**
+
+[rideshare-pro](https://github.com/adekunledally/rideshare-pro)
+
+---
 
 ## Repository at a Glance
 
 The repository is organised into six complementary engineering areas that
-document how the RideShare platform is designed, governed, built, deployed and
-operated.
+collectively define how the platform is designed, governed, built, deployed
+and operated.
 
 ```text
                          RideShare Platform
@@ -69,9 +97,12 @@ operated.
                      └─────────────────────┘
 ```
 
-Together, these areas provide a structured view of the platform's evolution
-from a single-region Kubernetes deployment to a production-oriented,
+Together, these engineering areas provide a structured view of the platform's
+evolution from a single-region Kubernetes deployment to a production-oriented,
 multi-region AWS platform.
+
+---
+
 ## Repository Structure
 
 ```text
@@ -93,27 +124,38 @@ rideshare-platform/
 └── CONTRIBUTING.md
 ```
 
+---
+
 ## Engineering Evolution
 
 ```text
-Single-Region Kubernetes Baseline
-                ↓
+Engineering Baseline
+Single-Region Amazon EKS
+CloudNativePG
+Redis Operator
+                │
+                ▼
 Architecture and Platform Governance
-                ↓
-Multi-Region Platform Foundation
-                ↓
-Managed AWS Services
-                ↓
+                │
+                ▼
+Multi-Region Infrastructure Foundation
+                │
+                ▼
+Managed AWS Data Services
+                │
+                ▼
 Platform Automation
-                ↓
+                │
+                ▼
 Operations and Reliability
-
 ```
 
-## Engineering Baseline
+---
 
-The project begins with an existing single-region Kubernetes platform composed
-of the following technologies and capabilities:
+## Current Platform Baseline
+
+The current engineering baseline consists of an existing single-region
+Kubernetes platform built on the following technologies and capabilities:
 
 - One Amazon EKS cluster
 - CloudNativePG
@@ -123,40 +165,52 @@ of the following technologies and capabilities:
 - External Secrets Operator
 - Helm
 - Amazon ECR
+- AWS Secrets Manager
+- Amazon EBS CSI Driver
+
+---
 
 ## Engineering Vision
 
-The target state is a standardised, production-oriented, multi-region AWS
-platform built around the following capabilities:
+The target platform is a standardised, production-oriented, multi-region AWS
+environment built around the following capabilities.
 
-### Cloud and Data Foundation
+### Cloud Foundation
 
 - Two regional Amazon EKS clusters
 - Amazon RDS for PostgreSQL
 - Amazon ElastiCache for Redis
-- Amazon Route 53 traffic management
+- Amazon Route 53 global traffic management
 
 ### Platform Engineering
 
 - Platform governance and engineering standards
-- Automated infrastructure and application delivery
-- Consistent platform capabilities across regions
+- Standardised infrastructure
+- Automated infrastructure provisioning
+- Automated application delivery
+- Consistent platform capabilities across AWS regions
 
 ### Operations and Reliability
 
 - Centralised observability
 - Operational controls and runbooks
-- Resilience and disaster-recovery capabilities
+- Disaster recovery capabilities
+- Resilience engineering
+- Platform health monitoring
+
+---
 
 ## Platform Evolution Roadmap
 
 | Phase | Objective | Status |
-|---|---|---|
+|--------|-----------|--------|
 | Phase 0 | Architecture and Strategy | ✅ Complete |
 | Phase 1 | Platform Governance | ✅ Complete |
-| Phase 2 | Platform Evolution | ⏳ Planned |
+| Phase 2 | Infrastructure Foundation | 🚧 In Progress |
 | Phase 3 | Platform Automation | ⏳ Planned |
-| Phase 4 | Platform Operations and Reliability | ⏳ Planned |
+| Phase 4 | Operations and Reliability | ⏳ Planned |
+
+---
 
 ## Documentation
 
@@ -165,7 +219,7 @@ platform built around the following capabilities:
 - Current-State Architecture
 - Target-State Architecture
 - Platform Evolution Roadmap
-- Architecture Decision Records
+- Architecture Decision Records (ADRs)
 
 ### Governance
 
@@ -182,9 +236,15 @@ platform built around the following capabilities:
 - Success Criteria
 - Execution Roadmap
 
-### Implementation and Operations
+### Implementation
 
 - Infrastructure
 - Shared Platform Capabilities
 - Application Workloads
-- Operations and Reliability
+
+### Operations
+
+- Platform Operations
+- Reliability Engineering
+- Disaster Recovery
+- Operational Runbooks
