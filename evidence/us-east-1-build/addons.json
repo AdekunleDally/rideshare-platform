@@ -1,0 +1,6 @@
+addons:
+- aws-ebs-csi-driver
+- coredns
+- kube-proxy
+- metrics-server
+- vpc-cni

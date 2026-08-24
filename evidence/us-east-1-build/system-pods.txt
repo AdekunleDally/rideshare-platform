@@ -1,0 +1,22 @@
+NAMESPACE     NAME                                 READY   STATUS    RESTARTS   AGE   IP              NODE                            NOMINATED NODE   READINESS GATES
+kube-system   aws-node-48zpf                       2/2     Running   0          46m   10.10.93.160    ip-10-10-93-160.ec2.internal    <none>           <none>
+kube-system   aws-node-8bsm9                       2/2     Running   0          46m   10.10.92.29     ip-10-10-92-29.ec2.internal     <none>           <none>
+kube-system   aws-node-bnckw                       2/2     Running   0          46m   10.10.64.170    ip-10-10-64-170.ec2.internal    <none>           <none>
+kube-system   aws-node-clx5m                       2/2     Running   0          46m   10.10.104.159   ip-10-10-104-159.ec2.internal   <none>           <none>
+kube-system   aws-node-g8nfx                       2/2     Running   0          46m   10.10.97.183    ip-10-10-97-183.ec2.internal    <none>           <none>
+kube-system   coredns-b8b6dd877-p8wfw              1/1     Running   0          51m   10.10.94.11     ip-10-10-93-160.ec2.internal    <none>           <none>
+kube-system   coredns-b8b6dd877-qz7q6              1/1     Running   0          51m   10.10.87.174    ip-10-10-93-160.ec2.internal    <none>           <none>
+kube-system   ebs-csi-controller-bf7bbb7f4-68b5j   6/6     Running   0          42m   10.10.127.62    ip-10-10-97-183.ec2.internal    <none>           <none>
+kube-system   ebs-csi-controller-bf7bbb7f4-bd889   6/6     Running   0          42m   10.10.78.86     ip-10-10-92-29.ec2.internal     <none>           <none>
+kube-system   ebs-csi-node-8zqwx                   3/3     Running   0          42m   10.10.87.44     ip-10-10-93-160.ec2.internal    <none>           <none>
+kube-system   ebs-csi-node-dfgh2                   3/3     Running   0          42m   10.10.65.148    ip-10-10-64-170.ec2.internal    <none>           <none>
+kube-system   ebs-csi-node-jrntp                   3/3     Running   0          42m   10.10.79.113    ip-10-10-92-29.ec2.internal     <none>           <none>
+kube-system   ebs-csi-node-tn5kp                   3/3     Running   0          42m   10.10.112.104   ip-10-10-104-159.ec2.internal   <none>           <none>
+kube-system   ebs-csi-node-tzq6t                   3/3     Running   0          42m   10.10.116.247   ip-10-10-97-183.ec2.internal    <none>           <none>
+kube-system   kube-proxy-fw4kf                     1/1     Running   0          46m   10.10.97.183    ip-10-10-97-183.ec2.internal    <none>           <none>
+kube-system   kube-proxy-gmvqf                     1/1     Running   0          46m   10.10.104.159   ip-10-10-104-159.ec2.internal   <none>           <none>
+kube-system   kube-proxy-j4dtk                     1/1     Running   0          46m   10.10.92.29     ip-10-10-92-29.ec2.internal     <none>           <none>
+kube-system   kube-proxy-kp8hb                     1/1     Running   0          46m   10.10.93.160    ip-10-10-93-160.ec2.internal    <none>           <none>
+kube-system   kube-proxy-lpnp6                     1/1     Running   0          46m   10.10.64.170    ip-10-10-64-170.ec2.internal    <none>           <none>
+kube-system   metrics-server-5f8959cc48-bx62j      1/1     Running   0          44m   10.10.103.120   ip-10-10-97-183.ec2.internal    <none>           <none>
+kube-system   metrics-server-5f8959cc48-z86tq      1/1     Running   0          44m   10.10.91.218    ip-10-10-92-29.ec2.internal     <none>           <none>

@@ -1,0 +1,12 @@
+NAME                                      READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS                IMAGES                                             SELECTOR
+deployment.apps/cert-manager              2/2     2            2           23m   cert-manager-controller   quay.io/jetstack/cert-manager-controller:v1.21.0   app.kubernetes.io/component=controller,app.kubernetes.io/instance=cert-manager,app.kubernetes.io/name=cert-manager
+deployment.apps/cert-manager-cainjector   2/2     2            2           23m   cert-manager-cainjector   quay.io/jetstack/cert-manager-cainjector:v1.21.0   app.kubernetes.io/component=cainjector,app.kubernetes.io/instance=cert-manager,app.kubernetes.io/name=cainjector
+deployment.apps/cert-manager-webhook      2/2     2            2           23m   cert-manager-webhook      quay.io/jetstack/cert-manager-webhook:v1.21.0      app.kubernetes.io/component=webhook,app.kubernetes.io/instance=cert-manager,app.kubernetes.io/name=webhook
+
+NAME                                           READY   STATUS    RESTARTS   AGE   IP              NODE                            NOMINATED NODE   READINESS GATES
+pod/cert-manager-5b6d5977c7-42xtl              1/1     Running   0          23m   10.10.93.150    ip-10-10-64-170.ec2.internal    <none>           <none>
+pod/cert-manager-5b6d5977c7-ntxmw              1/1     Running   0          23m   10.10.98.233    ip-10-10-104-159.ec2.internal   <none>           <none>
+pod/cert-manager-cainjector-6cfcdc96d6-bhzxs   1/1     Running   0          23m   10.10.108.80    ip-10-10-104-159.ec2.internal   <none>           <none>
+pod/cert-manager-cainjector-6cfcdc96d6-l7r9g   1/1     Running   0          23m   10.10.85.96     ip-10-10-64-170.ec2.internal    <none>           <none>
+pod/cert-manager-webhook-d55746f8d-j79dd       1/1     Running   0          23m   10.10.103.149   ip-10-10-104-159.ec2.internal   <none>           <none>
+pod/cert-manager-webhook-d55746f8d-nrgqm       1/1     Running   0          23m   10.10.74.237    ip-10-10-64-170.ec2.internal    <none>           <none>

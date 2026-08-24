@@ -1,0 +1,12 @@
+NAME                                               READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS         IMAGES                                             SELECTOR
+deployment.apps/external-secrets                   2/2     2            2           54m   external-secrets   ghcr.io/external-secrets/external-secrets:v2.7.0   app.kubernetes.io/instance=external-secrets,app.kubernetes.io/name=external-secrets
+deployment.apps/external-secrets-cert-controller   2/2     2            2           54m   cert-controller    ghcr.io/external-secrets/external-secrets:v2.7.0   app.kubernetes.io/instance=external-secrets,app.kubernetes.io/name=external-secrets-cert-controller
+deployment.apps/external-secrets-webhook           2/2     2            2           54m   webhook            ghcr.io/external-secrets/external-secrets:v2.7.0   app.kubernetes.io/instance=external-secrets,app.kubernetes.io/name=external-secrets-webhook
+
+NAME                                                    READY   STATUS    RESTARTS   AGE   IP              NODE                            NOMINATED NODE   READINESS GATES
+pod/external-secrets-5f8f5c4c54-rf555                   1/1     Running   0          54m   10.10.114.249   ip-10-10-104-159.ec2.internal   <none>           <none>
+pod/external-secrets-5f8f5c4c54-tfdnr                   1/1     Running   0          54m   10.10.86.241    ip-10-10-64-170.ec2.internal    <none>           <none>
+pod/external-secrets-cert-controller-64b79bd864-92kwp   1/1     Running   0          54m   10.10.72.169    ip-10-10-64-170.ec2.internal    <none>           <none>
+pod/external-secrets-cert-controller-64b79bd864-vbb4c   1/1     Running   0          54m   10.10.126.21    ip-10-10-104-159.ec2.internal   <none>           <none>
+pod/external-secrets-webhook-75c9c4486d-lhbqx           1/1     Running   0          54m   10.10.85.107    ip-10-10-64-170.ec2.internal    <none>           <none>
+pod/external-secrets-webhook-75c9c4486d-lwhpc           1/1     Running   0          54m   10.10.126.38    ip-10-10-104-159.ec2.internal   <none>           <none>

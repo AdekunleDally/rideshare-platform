@@ -1,0 +1,77 @@
+USER-SUPPLIED VALUES:
+controller:
+  admissionWebhooks:
+    enabled: true
+    patch:
+      nodeSelector:
+        workload-type: platform
+      tolerations:
+      - effect: NoSchedule
+        key: workload-type
+        operator: Equal
+        value: platform
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/component
+            operator: In
+            values:
+            - controller
+          - key: app.kubernetes.io/instance
+            operator: In
+            values:
+            - ingress-nginx
+        topologyKey: kubernetes.io/hostname
+  allowSnippetAnnotations: false
+  config:
+    compute-full-forwarded-for: "true"
+    enable-real-ip: "true"
+    proxy-connect-timeout: "10"
+    proxy-read-timeout: "60"
+    proxy-send-timeout: "60"
+    use-forwarded-headers: "true"
+  ingressClass: nginx
+  ingressClassResource:
+    controllerValue: k8s.io/ingress-nginx
+    default: true
+    enabled: true
+    name: nginx
+  metrics:
+    enabled: true
+    service:
+      annotations:
+        prometheus.io/port: "10254"
+        prometheus.io/scrape: "true"
+  nodeSelector:
+    workload-type: platform
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
+  publishService:
+    enabled: true
+  replicaCount: 2
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi
+  service:
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: Project=rideshare,Environment=production,Region=us-east-1,RegionCode=use1,Owner=platform-engineering,Repository=rideshare-platform
+      service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+      service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+      service.beta.kubernetes.io/aws-load-balancer-type: nlb
+    enabled: true
+    externalTrafficPolicy: Local
+    type: LoadBalancer
+  tolerations:
+  - effect: NoSchedule
+    key: workload-type
+    operator: Equal
+    value: platform
+defaultBackend:
+  enabled: false

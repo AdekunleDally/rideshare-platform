@@ -1,0 +1,65 @@
+cluster:
+  accessConfig:
+    authenticationMode: API_AND_CONFIG_MAP
+  arn: arn:aws:eks:us-east-1:287872994236:cluster/rideshare-prod-use1
+  certificateAuthority:
+    data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUREVENDQWZXZ0F3SUJBZ0lRYzB6bW1TRXRYZElQUmNMOU5pMnRzekFOQmdrcWhraUc5dzBCQVFzRkFEQVYKTVJNd0VRWURWUVFERXdwcmRXSmxjbTVsZEdWek1CNFhEVEkyTURneE5URTNNek14TWxvWERUTTJNRGd4TWpFMwpNek14TWxvd0ZURVRNQkVHQTFVRUF4TUthM1ZpWlhKdVpYUmxjekNDQVNJd0RRWUpLb1pJaHZjTkFRRUJCUUFECmdnRVBBRENDQVFvQ2dnRUJBTEY3bkc1UDg3WUNTVlBVL1lObldsMDQvNVc0UUpUemxvUFVCeitFUzNQNldtNVkKMkZtWVJCbTdyWVRESzlmSFN5RTlxM1lzYjJZMU1KY0UzQ3NzaWVVT2loalJtWEtsRjEzRG9KTG9DdWNKUlVMVwp2N2E3SHB1V0FwUW0rNDdJZE9FRmRHZ0V1V0h0K2lERXoxMEtFNngwU1JYZitPNEZWYnh6MStOejUyd1RkUFJJCkJlM0N4M2FQNW0wWTFMZVBpd3FmWC90VDF1eGVzNzlORDU4bkpxV0l2b1BSdGRJZkt5UHY5Nkd1b3NQcEhUTXAKQnRpMWxuc2pOT0ZmOS9UamlDM2wwOFpkdkNoY0F5dWUyR1RwdHUrKzBwVDJpWnNTUzVKcVZQSSsyWUFFQkRoWgordlZ4Y0NTN0RqZzg3K2tvL0MzV1hGVm5ORlJQTU53aENqNER6N0VDQXdFQUFhTlpNRmN3RGdZRFZSMFBBUUgvCkJBUURBZ0trTUE4R0ExVWRFd0VCL3dRRk1BTUJBZjh3SFFZRFZSME9CQllFRkFnd1lQaTVkZ3FnWUJrWXQ1WE0KbXM3WEtPNUhNQlVHQTFVZEVRUU9NQXlDQ210MVltVnlibVYwWlhNd0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQgpBRmpqUG9hOXFISTFwTUJQWGhtRHRiOEVKRHBZb3FCLy90b0paaGFlODQrQ0paVE5XQnJrbUp1T2RUTk4yMU4zCjhVVG5hVm1OTGFuVWl2a2R1NU5Sb0NWNnhIaWRGOHZhcU8vSExZYTNtVEltVzFoR0xyblg5Y1BUbXBOaUNiMnMKbmFwV3dMU2RNcWtvQ2RUUk9ka1ppU3hNTnhSdDNDWGVhYTRGOXFsTDRXcm5yTzk0WjdITGpraEN5c2dpSSs5aAp2WUFIU2M3THNLTjlYdUNuaSs4M003L1I0cVBzTFI3Z1RjS1JUbEFQUDYzcXVjb3RKaFFUOG02QkN3dnBsOElvCkFEbUc3TjQ3SjlJbWlQRStYeWVCOGRWOXdWays4ZmZ0cm1tYnZ4OTFSZWdibzVaZkc3dXZkM2NmQk5idWo0TmwKM2JTR0RxN3Q2TXFYSzgrS0RueTlCSWM9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+  controlPlaneScalingConfig:
+    tier: standard
+  createdAt: '2026-08-15T18:31:56.960000+01:00'
+  deletionProtection: false
+  endpoint: https://592EF2382DE1D0DB0905671AC3420877.gr7.us-east-1.eks.amazonaws.com
+  identity:
+    oidc:
+      issuer: https://oidc.eks.us-east-1.amazonaws.com/id/592EF2382DE1D0DB0905671AC3420877
+  kubernetesNetworkConfig:
+    elasticLoadBalancing:
+      enabled: false
+    ipFamily: ipv4
+    serviceIpv4Cidr: 172.20.0.0/16
+  logging:
+    clusterLogging:
+    - enabled: true
+      types:
+      - api
+      - audit
+      - authenticator
+      - controllerManager
+      - scheduler
+  name: rideshare-prod-use1
+  platformVersion: eks.10
+  resourcesVpcConfig:
+    clusterSecurityGroupId: sg-0c38c3804ba4792de
+    endpointPrivateAccess: false
+    endpointPublicAccess: true
+    publicAccessCidrs:
+    - 0.0.0.0/0
+    securityGroupIds:
+    - sg-0cb10e972a2732c4a
+    subnetIds:
+    - subnet-031e41a0712c369a2
+    - subnet-0fba8677d0c3435e0
+    - subnet-0faff14c49389af7d
+    - subnet-0e8ce6ba358a67dd5
+    vpcId: vpc-0e844c76a945561ab
+  roleArn: arn:aws:iam::287872994236:role/eksctl-rideshare-prod-use1-cluster-ServiceRole-EH0AsHLlPMFt
+  status: ACTIVE
+  tags:
+    Environment: production
+    ManagedBy: eksctl
+    Name: eksctl-rideshare-prod-use1-cluster/ControlPlane
+    Owner: platform-engineering
+    Project: rideshare
+    Region: us-east-1
+    RegionCode: use1
+    Repository: rideshare-platform
+    alpha.eksctl.io/cluster-name: rideshare-prod-use1
+    alpha.eksctl.io/cluster-oidc-enabled: 'true'
+    alpha.eksctl.io/eksctl-version: 0.226.0
+    aws:cloudformation:logical-id: ControlPlane
+    aws:cloudformation:stack-id: arn:aws:cloudformation:us-east-1:287872994236:stack/eksctl-rideshare-prod-use1-cluster/24a8a3c0-98cf-11f1-beed-12b31e822a1d
+    aws:cloudformation:stack-name: eksctl-rideshare-prod-use1-cluster
+    eksctl.cluster.k8s.io/v1alpha1/cluster-name: rideshare-prod-use1
+  upgradePolicy:
+    supportType: EXTENDED
+  version: '1.36'

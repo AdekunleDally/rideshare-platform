@@ -1,0 +1,2 @@
+NAME         	NAMESPACE    	REVISION	UPDATED                              	STATUS  	CHART               	APP VERSION
+ingress-nginx	ingress-nginx	2       	2026-08-17 06:07:23.4576224 +0100 WAT	deployed	ingress-nginx-4.15.1	1.15.1     

@@ -1,0 +1,39 @@
+Name:         cert-manager-dns01-test
+Namespace:    rideshare
+Labels:       app.kubernetes.io/managed-by=cert-manager
+              app.kubernetes.io/part-of=rideshare-platform
+Annotations:  <none>
+API Version:  cert-manager.io/v1
+Kind:         Certificate
+Metadata:
+  Creation Timestamp:  2026-08-17T09:12:44Z
+  Generation:          1
+  Resource Version:    703306
+  UID:                 5968f5b7-73cc-40a7-b299-96b9f345ada5
+Spec:
+  Dns Names:
+    cert-test.lukmonadeokun.com
+  Issuer Ref:
+    Group:      cert-manager.io
+    Kind:       ClusterIssuer
+    Name:       letsencrypt-staging
+  Secret Name:  cert-manager-dns01-test-tls
+Status:
+  Conditions:
+    Last Transition Time:  2026-08-17T09:12:45Z
+    Message:               Certificate is up to date and has not expired
+    Observed Generation:   1
+    Reason:                Ready
+    Status:                True
+    Type:                  Ready
+  Not After:               2026-11-15T08:14:14Z
+  Not Before:              2026-08-17T08:14:15Z
+  Renewal Time:            2026-10-16T08:14:14Z
+  Revision:                1
+Events:
+  Type    Reason     Age    From                                       Message
+  ----    ------     ----   ----                                       -------
+  Normal  Issuing    3m59s  cert-manager-certificates-trigger          Issuing certificate as Secret does not exist
+  Normal  Generated  3m59s  cert-manager-certificates-key-manager      Stored new private key in temporary Secret resource "cert-manager-dns01-test-lmg89"
+  Normal  Requested  3m59s  cert-manager-certificates-request-manager  Created new CertificateRequest resource "cert-manager-dns01-test-1"
+  Normal  Issuing    3m58s  cert-manager-certificates-issuing          The certificate has been successfully issued

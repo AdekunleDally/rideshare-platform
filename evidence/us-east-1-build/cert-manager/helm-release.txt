@@ -1,0 +1,2 @@
+NAME        	NAMESPACE   	REVISION	UPDATED                              	STATUS  	CHART               	APP VERSION
+cert-manager	cert-manager	1       	2026-08-17 09:52:07.4968844 +0100 WAT	deployed	cert-manager-v1.21.0	v1.21.0    

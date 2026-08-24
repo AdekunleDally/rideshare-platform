@@ -1,0 +1,6 @@
+NAME                            STATUS   ROLES    AGE   VERSION               WORKLOAD-TYPE   NODEGROUP
+ip-10-10-104-159.ec2.internal   Ready    <none>   45m   v1.36.2-eks-254016e   platform        system-ng
+ip-10-10-64-170.ec2.internal    Ready    <none>   46m   v1.36.2-eks-254016e   platform        system-ng
+ip-10-10-92-29.ec2.internal     Ready    <none>   46m   v1.36.2-eks-254016e   application     application-ng
+ip-10-10-93-160.ec2.internal    Ready    <none>   46m   v1.36.2-eks-254016e   application     application-ng
+ip-10-10-97-183.ec2.internal    Ready    <none>   46m   v1.36.2-eks-254016e   application     application-ng

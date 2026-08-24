@@ -1,0 +1,2 @@
+NAME            	NAMESPACE       	REVISION	UPDATED                              	STATUS  	CHART                 	APP VERSION
+external-secrets	external-secrets	1       	2026-08-17 10:52:13.3028465 +0100 WAT	deployed	external-secrets-2.7.0	v2.7.0     

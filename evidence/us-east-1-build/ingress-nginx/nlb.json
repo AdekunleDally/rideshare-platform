@@ -1,0 +1,19 @@
+- AvailabilityZones:
+  - LoadBalancerAddresses: []
+    SubnetId: subnet-0fba8677d0c3435e0
+    ZoneName: us-east-1b
+  - LoadBalancerAddresses: []
+    SubnetId: subnet-031e41a0712c369a2
+    ZoneName: us-east-1c
+  CanonicalHostedZoneId: Z26RNL4JYFTOTI
+  CreatedTime: '2026-08-16T00:58:00.690000+00:00'
+  DNSName: a7cfca60b881d452dad959d096132811-c3c4d636d52e1f40.elb.us-east-1.amazonaws.com
+  EnablePrefixForIpv6SourceNat: off
+  IpAddressType: ipv4
+  LoadBalancerArn: arn:aws:elasticloadbalancing:us-east-1:287872994236:loadbalancer/net/a7cfca60b881d452dad959d096132811/c3c4d636d52e1f40
+  LoadBalancerName: a7cfca60b881d452dad959d096132811
+  Scheme: internet-facing
+  State:
+    Code: active
+  Type: network
+  VpcId: vpc-0e844c76a945561ab

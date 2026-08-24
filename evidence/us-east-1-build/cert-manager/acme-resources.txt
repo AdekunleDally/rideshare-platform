@@ -1,0 +1,8 @@
+NAME                                                  READY   SECRET                        ISSUER                STATUS                                          AGE
+certificate.cert-manager.io/cert-manager-dns01-test   True    cert-manager-dns01-test-tls   letsencrypt-staging   Certificate is up to date and has not expired   3m46s
+
+NAME                                                           APPROVED   DENIED   READY   ISSUER                REQUESTER                                         STATUS                                         AGE
+certificaterequest.cert-manager.io/cert-manager-dns01-test-1   True                True    letsencrypt-staging   system:serviceaccount:cert-manager:cert-manager   Certificate fetched from issuer successfully   3m46s
+
+NAME                                                              STATE   ISSUER                REASON   AGE
+order.acme.cert-manager.io/cert-manager-dns01-test-1-3851715303   valid   letsencrypt-staging            3m46s
