@@ -30,3 +30,13 @@ Thumbs.db
 # Temporary files
 tmp/
 temp/
+
+# Raw database backup files
+*.dump
+*.backup
+*-backup.sql
+*-dump.sql
+infrastructure/regions/*/data/rds/backups/
+rideshare-db-credentials.json
+.migration-work/
+**/charts/*.tgz
