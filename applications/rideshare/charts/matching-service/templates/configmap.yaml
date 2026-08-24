@@ -1,0 +1,23 @@
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: matching-service-config
+#   namespace: rideshare
+# data:
+#   TRIP_SERVICE_URL: "http://trip-service:3005"
+#   #REDIS_HOST: "redis-standalone"
+#   REDIS_HOST: "rideshare-redis-cluster-master"
+#   REDIS_PORT: "6379"
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: matching-service-config
+  namespace: {{ .Release.Namespace }}
+data:
+  TRIP_SERVICE_URL: {{ .Values.config.TRIP_SERVICE_URL | quote }}
+
+  # Redis (use service in redis namespace)
+  REDIS_HOST: {{ .Values.config.REDIS_HOST | quote }}
+  REDIS_PORT: {{ .Values.config.REDIS_PORT | quote }}
+ 

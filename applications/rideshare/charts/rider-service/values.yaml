@@ -1,0 +1,37 @@
+# Default values for rider-service.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
+replicaCount: 2
+
+# This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
+image:
+  #repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/rider-service
+  #repository: 495331822130.dkr.ecr.us-east-2.amazonaws.com/lukman-rideshare-rider-service
+  # This sets the pull policy for images.
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "1.2"
+
+container:
+  port: 3001
+
+config:
+  NODE_ENV: "production"
+  PORT: "3001"
+  REDIS_HOST: "rideshare-redis-cluster-leader.redis.svc.cluster.local"
+  REDIS_PORT: "6379"
+  JWT_EXPIRES_IN: "2d"
+  FRONTEND_URL: "https://rideshare.lukmonadeokun.com"
+  EMAIL_SERVICE_URL: "http://email-service:3002"
+  TRIP_SERVICE_URL: "http://trip-service:3005"
+  RIDER_SERVICE_URL: "http://rider-service:3001"
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "256Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"

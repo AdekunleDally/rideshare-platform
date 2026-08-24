@@ -1,0 +1,29 @@
+global:
+  namespace: rideshare
+  domain: rideshare.lukmonadeokun.com
+
+  environment: production
+
+frontend:
+  image:
+    repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/frontend
+
+driver-service:
+  image:
+    repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/driver-service
+
+rider-service:
+  image:
+    repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/rider-service
+
+trip-service:
+  image:
+    repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/trip-service
+
+matching-service:
+  image:
+    repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/matching-service
+
+email-service:
+  image:
+    repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/email-service

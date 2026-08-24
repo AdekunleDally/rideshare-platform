@@ -1,0 +1,33 @@
+# Default values for frontend.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
+replicaCount: 2
+
+# This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
+image:
+  #repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/frontend
+  #repository: 495331822130.dkr.ecr.us-east-2.amazonaws.com/lukman-rideshare-frontend
+  # This sets the pull policy for images.
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "2.0"
+
+container:
+  port: 3000
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "256Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+
+config:
+  NEXT_PUBLIC_DRIVER_API: "https://rideshare.lukmonadeokun.com"
+  NEXT_PUBLIC_RIDER_API: "https://rideshare.lukmonadeokun.com"
+  NEXT_PUBLIC_TRIP_API: "https://rideshare.lukmonadeokun.com"
+  NEXT_PUBLIC_MATCHING_API: "https://rideshare.lukmonadeokun.com"
+  NEXT_PUBLIC_WS_URL: "wss://rideshare.lukmonadeokun.com/api/v1/matching"

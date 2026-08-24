@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: rider-service-pdb
+  namespace: rideshare
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: rider-service

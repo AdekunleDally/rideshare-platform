@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.replicaCount}}
+  selector:
+    matchLabels:
+      app: email-service
+  template:
+    metadata:
+      labels:
+        app: email-service
+    spec:
+      containers:
+        - name: email-service
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          readinessProbe:
+            httpGet:
+              path: /api/v1/email/health
+              port: 3002
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+          livenessProbe:
+            httpGet:
+              path: /api/v1/email/health
+              port: 3002
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 3
+
+          ports:
+            - containerPort: {{ .Values.container.port }}
+
+          resources:
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
+
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: email-service-config
+                  key: PORT
+
+            - name: AZURE_EMAIL_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: email-service-secret
+                  key: AZURE_EMAIL_CONNECTION_STRING
+
+            - name: SENDER_EMAIL
+              valueFrom:
+                secretKeyRef:
+                  name: email-service-secret
+                  key: SENDER_EMAIL

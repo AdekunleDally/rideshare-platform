@@ -1,0 +1,21 @@
+dependencies:
+- name: frontend
+  repository: file://charts/frontend
+  version: 0.1.0
+- name: rider-service
+  repository: file://charts/rider-service
+  version: 0.1.0
+- name: driver-service
+  repository: file://charts/driver-service
+  version: 0.1.0
+- name: trip-service
+  repository: file://charts/trip-service
+  version: 0.1.0
+- name: matching-service
+  repository: file://charts/matching-service
+  version: 0.1.0
+- name: email-service
+  repository: file://charts/email-service
+  version: 0.1.0
+digest: sha256:5d76ac6ef7b60a53e653e42d29f98c348c22266d476ea02175f7f532df18f8af
+generated: "2026-07-07T23:27:58.9576653+01:00"

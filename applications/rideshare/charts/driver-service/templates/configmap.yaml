@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: driver-service-config
+  namespace: {{ .Release.Namespace }}
+data:
+  NODE_ENV: {{ .Values.config.NODE_ENV | quote }}
+  PORT: {{ .Values.config.PORT | quote }}
+  REDIS_HOST: {{ .Values.config.REDIS_HOST | quote }}
+  REDIS_PORT: {{ .Values.config.REDIS_PORT | quote }}
+  JWT_EXPIRES_IN: {{ .Values.config.JWT_EXPIRES_IN | quote }}
+  FRONTEND_URL: {{ .Values.config.FRONTEND_URL | quote }}
+  EMAIL_SERVICE_URL: {{ .Values.config.EMAIL_SERVICE_URL | quote }}
+  TRIP_SERVICE_URL: {{ .Values.config.TRIP_SERVICE_URL | quote }}
+  DRIVER_SERVICE_URL: {{ .Values.config.DRIVER_SERVICE_URL | quote }}
