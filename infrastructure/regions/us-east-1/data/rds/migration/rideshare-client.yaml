@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: rideshare-client
+  namespace: database-migration
+  labels:
+    app.kubernetes.io/name: rideshare-client
+    app.kubernetes.io/part-of: rideshare-platform
+spec:
+  restartPolicy: Never
+
+  nodeSelector:
+    workload-type: application
+
+  containers:
+    - name: postgres-client
+      image: postgres:16.14
+
+      command:
+        - sleep
+        - "3600"
+
+      env:
+        - name: PGHOST
+          valueFrom:
+            secretKeyRef:
+              name: rideshare-db-credentials
+              key: host
+
+        - name: PGPORT
+          valueFrom:
+            secretKeyRef:
+              name: rideshare-db-credentials
+              key: port
+
+        - name: PGUSER
+          valueFrom:
+            secretKeyRef:
+              name: rideshare-db-credentials
+              key: username
+
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rideshare-db-credentials
+              key: password
+
+        - name: PGDATABASE
+          valueFrom:
+            secretKeyRef:
+              name: rideshare-db-credentials
+              key: database
+
+        - name: PGSSLMODE
+          valueFrom:
+            secretKeyRef:
+              name: rideshare-db-credentials
+              key: sslmode
