@@ -1,0 +1,46 @@
+cloudProvider: aws
+
+awsRegion: us-east-1
+
+autoDiscovery:
+  clusterName: rideshare-prod-use1
+
+rbac:
+  create: true
+
+  serviceAccount:
+    create: false
+    name: cluster-autoscaler-sa
+
+image:
+  repository: registry.k8s.io/autoscaling/cluster-autoscaler
+  tag: v1.cd ..36.0
+
+replicaCount: 1
+
+nodeSelector:
+  workload-type: platform
+
+tolerations:
+  - key: workload-type
+    operator: Equal
+    value: platform
+    effect: NoSchedule
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 300Mi
+
+  limits:
+    cpu: 200m
+    memory: 600Mi
+
+extraArgs:
+  balance-similar-node-groups: "true"
+  skip-nodes-with-system-pods: "false"
+  skip-nodes-with-local-storage: "false"
+  expander: least-waste
+
+podAnnotations:
+  cluster-autoscaler.kubernetes.io/safe-to-evict: "false"

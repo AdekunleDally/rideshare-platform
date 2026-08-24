@@ -1,0 +1,75 @@
+installCRDs: true
+
+replicaCount: 2
+leaderElect: true
+
+serviceAccount:
+  create: false
+  name: external-secrets
+
+nodeSelector:
+  workload-type: platform
+
+tolerations:
+  - key: workload-type
+    operator: Equal
+    value: platform
+    effect: NoSchedule
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          topologyKey: kubernetes.io/hostname
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: external-secrets
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 300m
+    memory: 256Mi
+
+webhook:
+  replicaCount: 2
+
+  nodeSelector:
+    workload-type: platform
+
+  tolerations:
+    - key: workload-type
+      operator: Equal
+      value: platform
+      effect: NoSchedule
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+
+certController:
+  replicaCount: 2
+
+  nodeSelector:
+    workload-type: platform
+
+  tolerations:
+    - key: workload-type
+      operator: Equal
+      value: platform
+      effect: NoSchedule
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi

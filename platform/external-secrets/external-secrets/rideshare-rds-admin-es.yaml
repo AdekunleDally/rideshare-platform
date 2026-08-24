@@ -1,0 +1,44 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: external-secrets
+    app.kubernetes.io/name: rideshare-rds-admin
+    app.kubernetes.io/part-of: rideshare-platform
+  name: rideshare-rds-admin
+  namespace: database-migration
+spec:
+  data:
+    - remoteRef:
+        conversionStrategy: Default
+        decodingStrategy: None
+        key: arn:aws:secretsmanager:us-east-1:287872994236:secret:rds!db-402f2e5e-a0ea-481a-af70-f37e4cc286bb-O7mbJU
+        metadataPolicy: None
+        property: username
+      secretKey: username
+    - remoteRef:
+        conversionStrategy: Default
+        decodingStrategy: None
+        key: arn:aws:secretsmanager:us-east-1:287872994236:secret:rds!db-402f2e5e-a0ea-481a-af70-f37e4cc286bb-O7mbJU
+        metadataPolicy: None
+        property: password
+      secretKey: password
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: aws-secrets-manager
+  target:
+    creationPolicy: Owner
+    deletionPolicy: Retain
+    name: rideshare-rds-admin
+    template:
+      data:
+        database: rideshare
+        host: rideshare-prod-use1-postgres.cafwao08sxlo.us-east-1.rds.amazonaws.com
+        password: "{{ .password }}"
+        port: "5432"
+        sslmode: require
+        username: "{{ .username }}"
+      engineVersion: v2
+      mergePolicy: Replace
+      type: Opaque

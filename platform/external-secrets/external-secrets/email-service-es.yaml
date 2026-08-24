@@ -1,0 +1,22 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: email-service-es
+  namespace: rideshare
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: aws-secrets-manager
+  target:
+    name: email-service-secret
+    creationPolicy: Owner
+  data:
+    - secretKey: AZURE_EMAIL_CONNECTION_STRING
+      remoteRef:
+        key: rideshare/email-service-secret
+        property: AZURE_EMAIL_CONNECTION_STRING
+    - secretKey: SENDER_EMAIL
+      remoteRef:
+        key: rideshare/email-service-secret
+        property: SENDER_EMAIL

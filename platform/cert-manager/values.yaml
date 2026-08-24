@@ -1,0 +1,90 @@
+crds:
+  enabled: true
+  keep: true
+
+replicaCount: 2
+
+serviceAccount:
+  create: false
+  name: cert-manager
+
+nodeSelector:
+  workload-type: platform
+
+tolerations:
+  - key: workload-type
+    operator: Equal
+    value: platform
+    effect: NoSchedule
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          topologyKey: kubernetes.io/hostname
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: cert-manager
+              app.kubernetes.io/component: controller
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 300m
+    memory: 256Mi
+
+prometheus:
+  enabled: true
+
+webhook:
+  replicaCount: 2
+
+  nodeSelector:
+    workload-type: platform
+
+  tolerations:
+    - key: workload-type
+      operator: Equal
+      value: platform
+      effect: NoSchedule
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+
+cainjector:
+  replicaCount: 2
+
+  nodeSelector:
+    workload-type: platform
+
+  tolerations:
+    - key: workload-type
+      operator: Equal
+      value: platform
+      effect: NoSchedule
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+
+startupapicheck:
+  nodeSelector:
+    workload-type: platform
+
+  tolerations:
+    - key: workload-type
+      operator: Equal
+      value: platform
+      effect: NoSchedule
