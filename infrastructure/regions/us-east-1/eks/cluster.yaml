@@ -1,0 +1,97 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: rideshare-prod-use1
+  region: us-east-1
+  version: "1.36"
+
+  tags:
+    Project: rideshare
+    Environment: production
+    Region: us-east-1
+    RegionCode: use1
+    ManagedBy: eksctl
+    Owner: platform-engineering
+    Repository: rideshare-platform
+
+vpc:
+  cidr: 10.10.0.0/16
+
+  nat:
+    gateway: HighlyAvailable
+
+iam:
+  withOIDC: true
+
+managedNodeGroups:
+  - name: system-ng
+
+    instanceType: t3.large
+
+    desiredCapacity: 2
+    minSize: 2
+    maxSize: 4
+
+    privateNetworking: true
+    volumeSize: 50
+
+    labels:
+      workload-type: platform
+
+    taints:
+      - key: workload-type
+        value: platform
+        effect: NoSchedule
+
+    tags:
+      Project: rideshare
+      Environment: production
+      Region: us-east-1
+      NodeGroup: system
+      k8s.io/cluster-autoscaler/enabled: "true"
+      k8s.io/cluster-autoscaler/rideshare-prod-use1: "owned"
+
+  - name: application-ng
+
+    instanceType: t3.large
+
+    desiredCapacity: 3
+    minSize: 2
+    maxSize: 8
+
+    privateNetworking: true
+    volumeSize: 50
+
+    labels:
+      workload-type: application
+
+    tags:
+      Project: rideshare
+      Environment: production
+      Region: us-east-1
+      NodeGroup: application
+      k8s.io/cluster-autoscaler/enabled: "true"
+      k8s.io/cluster-autoscaler/rideshare-prod-use1: "owned"
+
+addons:
+  - name: vpc-cni
+
+  - name: coredns
+
+  - name: kube-proxy
+
+  - name: metrics-server
+
+  - name: aws-ebs-csi-driver
+    wellKnownPolicies:
+      ebsCSIController: true
+
+cloudWatch:
+  clusterLogging:
+    enableTypes:
+      - api
+      - audit
+      - authenticator
+      - controllerManager
+      - scheduler
