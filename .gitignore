@@ -40,3 +40,4 @@ infrastructure/regions/*/data/rds/backups/
 rideshare-db-credentials.json
 .migration-work/
 **/charts/*.tgz
+ingress-smoke-test.yaml
