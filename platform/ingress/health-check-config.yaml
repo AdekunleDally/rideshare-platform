@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: health-check-nginx
+  namespace: rideshare
+data:
+  default.conf: |
+    server {
+      listen 80;
+      listen [::]:80;
+
+      server_name localhost;
+
+      location = /application-healthz {
+        access_log off;
+        return 200 "OK\n";
+      }
+
+      location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+      }
+    }
