@@ -12,9 +12,19 @@ driver-service:
   image:
     repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/driver-service
 
+  config:
+    REDIS_HOST: "master.rideshare-prod-use1-redis.zjqim0.use1.cache.amazonaws.com"
+    REDIS_PORT: "6379"
+    REDIS_TLS: "true"
+
 rider-service:
   image:
     repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/rider-service
+
+  config:
+    REDIS_HOST: "master.rideshare-prod-use1-redis.zjqim0.use1.cache.amazonaws.com"
+    REDIS_PORT: "6379"
+    REDIS_TLS: "true"
 
 trip-service:
   image:
@@ -23,6 +33,12 @@ trip-service:
 matching-service:
   image:
     repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/matching-service
+
+  config:
+    TRIP_SERVICE_URL: "http://trip-service:3005"
+  # REDIS_HOST: "master.rideshare-prod-use1-redis.zjqim0.use1.cache.amazonaws.com"
+  # REDIS_PORT: "6379"
+  # REDIS_TLS: "true"
 
 email-service:
   image:

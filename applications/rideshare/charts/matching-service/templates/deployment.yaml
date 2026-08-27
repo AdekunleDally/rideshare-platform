@@ -51,12 +51,6 @@ spec:
                 name: matching-service-config
 
           env:
-            - name: REDIS_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: redis-secret
-                  key: password
-
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:

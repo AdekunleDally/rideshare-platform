@@ -12,7 +12,7 @@ image:
   # This sets the pull policy for images.
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.2"
+  tag: "1.4"
 
 container:
   port: 3001
@@ -27,6 +27,7 @@ config:
   EMAIL_SERVICE_URL: "http://email-service:3002"
   TRIP_SERVICE_URL: "http://trip-service:3005"
   RIDER_SERVICE_URL: "http://rider-service:3001"
+  REDIS_TLS: "false"
 
 resources:
   requests:

@@ -13,3 +13,4 @@ data:
   EMAIL_SERVICE_URL: {{ .Values.config.EMAIL_SERVICE_URL | quote }}
   TRIP_SERVICE_URL: {{ .Values.config.TRIP_SERVICE_URL | quote }}
   DRIVER_SERVICE_URL: {{ .Values.config.DRIVER_SERVICE_URL | quote }}
+  REDIS_TLS: {{ .Values.config.REDIS_TLS | quote }}
