@@ -12,7 +12,7 @@ image:
   # This sets the pull policy for images.
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "1.4"
+  tag: ""
 
 container:
   port: 3001
@@ -20,7 +20,9 @@ container:
 config:
   NODE_ENV: "production"
   PORT: "3001"
-  REDIS_HOST: "rideshare-redis-cluster-leader.redis.svc.cluster.local"
+  # REDIS_HOST: "rideshare-redis-cluster-leader.redis.svc.cluster.local"
+  REDIS_HOST: ""
+
   REDIS_PORT: "6379"
   JWT_EXPIRES_IN: "2d"
   FRONTEND_URL: "https://rideshare.lukmonadeokun.com"

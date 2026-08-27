@@ -7,10 +7,12 @@ global:
 frontend:
   image:
     repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/frontend
+    tag: "2.0"
 
 driver-service:
   image:
     repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/driver-service
+    tag: "1.6"
 
   config:
     REDIS_HOST: "master.rideshare-prod-use1-redis.zjqim0.use1.cache.amazonaws.com"
@@ -20,6 +22,7 @@ driver-service:
 rider-service:
   image:
     repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/rider-service
+    tag: "1.4"
 
   config:
     REDIS_HOST: "master.rideshare-prod-use1-redis.zjqim0.use1.cache.amazonaws.com"
@@ -29,17 +32,17 @@ rider-service:
 trip-service:
   image:
     repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/trip-service
+    tag: "1.8"
 
 matching-service:
   image:
     repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/matching-service
+    tag: "1.9"
 
   config:
     TRIP_SERVICE_URL: "http://trip-service:3005"
-  # REDIS_HOST: "master.rideshare-prod-use1-redis.zjqim0.use1.cache.amazonaws.com"
-  # REDIS_PORT: "6379"
-  # REDIS_TLS: "true"
 
 email-service:
   image:
     repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/email-service
+    tag: "1.4"
