@@ -65,7 +65,7 @@ can be understood without requiring additional project context.
 
 | ADR | Decision |
 |------|----------|
-| ADR-001 |[ADR-001: Use Two Regional Amazon EKS Clusters](./ADR-001-multi-region-eks.md) |
+| ADR-001 |[ADR-001: Adopt Two Standardised Regional Amazon EKS Platforms](./ADR-001-multi-region-eks.md) |
 | ADR-002 | [ADR-002: Use Amazon RDS for PostgreSQL](./ADR-002-managed-postgresql.md) |
 | ADR-003 |  [ADR-003: Use Amazon ElastiCache for Redis](./ADR-003-managed-redis.md) |
 | ADR-004 |[ADR-004: Use Amazon Route 53 Latency-Based Routing](./ADR-004-global-dns-routing.md) |

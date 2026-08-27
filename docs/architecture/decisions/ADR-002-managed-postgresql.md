@@ -13,8 +13,8 @@ The RideShare platform currently runs PostgreSQL within
 
 The target architecture introduces two active Amazon EKS clusters:
 
-- `lukman-rideshare-cluster` (`us-east-2`)
-- `faahidah-rideshare-cluster` (`us-east-1`)
+- `rideshare-prod-use1` (`us-east-1`)
+- `rideshare-prod-use2` (`us-east-2`)
 
 Both regional deployments require access to the same rider, driver, trip and
 payment data.

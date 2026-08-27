@@ -10,8 +10,8 @@ Accepted
 
 The RideShare platform is deployed to two active Amazon EKS clusters:
 
-- `lukman-rideshare-cluster` (`us-east-2`)
-- `faahidah-rideshare-cluster` (`us-east-1`)
+- `rideshare-prod-use1` (`us-east-1`)
+- `rideshare-prod-use2` (`us-east-2`)
 
 Each cluster exposes the application through its own:
 
