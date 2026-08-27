@@ -19,7 +19,7 @@ spec:
           imagePullPolicy: Always
           readinessProbe:
             httpGet:
-              path: /api/v1/health
+              path: /api/v1/drivers/health
               port: 3003
             initialDelaySeconds: 10
             periodSeconds: 10
@@ -28,7 +28,7 @@ spec:
 
           livenessProbe:
             httpGet:
-              path: /api/v1/health
+              path: /api/v1/drivers/health
               port: 3003
             initialDelaySeconds: 30
             periodSeconds: 20
