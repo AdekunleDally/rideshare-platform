@@ -14,7 +14,7 @@ rbac:
 
 image:
   repository: registry.k8s.io/autoscaling/cluster-autoscaler
-  tag: v1.cd ..36.0
+  tag: v1.36.0
 
 replicaCount: 1
 
