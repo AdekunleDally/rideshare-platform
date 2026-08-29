@@ -1,0 +1,12 @@
+{
+  "rules": [
+    {
+      "destinations": [
+        {
+          "region": "us-east-2",
+          "registryId": "287872994236"
+        }
+      ]
+    }
+  ]
+}
