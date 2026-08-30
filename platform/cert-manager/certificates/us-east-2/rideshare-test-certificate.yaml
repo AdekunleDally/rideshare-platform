@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-manager-dns02-test
+  namespace: rideshare
+  labels:
+    app.kubernetes.io/part-of: rideshare-platform
+    app.kubernetes.io/managed-by: cert-manager
+spec:
+  secretName: cert-manager-dns02-test-tls
+
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+    group: cert-manager.io
+
+  dnsNames:
+    - cert-test.lukmonadeokun.com

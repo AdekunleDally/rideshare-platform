@@ -23,8 +23,10 @@ spec:
     spec:
       securityContext:
         runAsNonRoot: true
-      seccompProfile:
-        type: RuntimeDefault
+        runAsUser: 1001
+        runAsGroup: 65533
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: driver-service
           securityContext:

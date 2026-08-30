@@ -5,23 +5,19 @@ metadata:
   namespace: rideshare
 spec:
   refreshInterval: 1h
-
   secretStoreRef:
     name: aws-secrets-manager
     kind: ClusterSecretStore
-
   target:
     name: redis-secret
     creationPolicy: Owner
-    deletionPolicy: Retain
-
   data:
     - secretKey: REDIS_URL
       remoteRef:
-        key: rideshare/redis-secret
+        key: rideshare/production/redis/credentials
         property: REDIS_URL
 
     - secretKey: password
       remoteRef:
-        key: rideshare/redis-secret
+        key: rideshare/production/redis/credentials
         property: redis-password

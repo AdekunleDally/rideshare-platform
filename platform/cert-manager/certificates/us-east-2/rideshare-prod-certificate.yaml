@@ -1,0 +1,15 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: rideshare-prod-use2-tls
+  namespace: rideshare
+
+spec:
+  secretName: rideshare-prod-use2-tls
+
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+
+  dnsNames:
+    - rideshare.lukmonadeokun.com
