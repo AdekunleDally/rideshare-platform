@@ -421,8 +421,8 @@ The complete validation approach is documented in the [Validation Plan](./docs/a
 |---|---|---|
 | Phase 0 | Assess the existing platform and define the target architecture | Complete |
 | Phase 1 | Establish platform governance and engineering standards | Complete |
-| Phase 2 | `Build the target multi-region platform and migrate PostgreSQL and Redis to AWS-managed services | In progress |
-| Phase 3 | Reproducible delivery automation | Planned |
+| Phase 2 | `Build the target multi-region platform and migrate PostgreSQL and Redis to AWS-managed services | Complete |
+| Phase 3 | Reproducible delivery automation | In progress |
 | Phase 4 | Observability, operations and resilience validation | Planned |
 
 A phase is considered complete when its implementation and required validation have been completed and the relevant evidence has been recorded.
