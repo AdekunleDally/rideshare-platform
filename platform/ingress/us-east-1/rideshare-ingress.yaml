@@ -52,6 +52,14 @@ spec:
     - host: rideshare.lukmonadeokun.com
       http:
         paths:
+          - path: /application-healthz
+            pathType: Exact
+            backend:
+              service:
+                name: health-check
+                port:
+                  number: 80
+
           - path: /api/v1/riders
             pathType: Prefix
             backend:

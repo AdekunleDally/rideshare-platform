@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rideshare-route53-health
+  namespace: rideshare
+
+spec:
+  ingressClassName: nginx
+
+  tls:
+    - hosts:
+        - use2.rideshare.lukmonadeokun.com
+      secretName: rideshare-prod-use2-health-tls
+
+  rules:
+    - host: use2.rideshare.lukmonadeokun.com
+      http:
+        paths:
+          - path: /application-healthz
+            pathType: Exact
+            backend:
+              service:
+                name: health-check
+                port:
+                  number: 80

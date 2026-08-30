@@ -1,0 +1,29 @@
+{
+    "Comment": "Create regional RideShare operational endpoints",
+    "Changes": [
+        {
+            "Action": "UPSERT",
+            "ResourceRecordSet": {
+                "Name": "use1.rideshare.lukmonadeokun.com",
+                "Type": "A",
+                "AliasTarget": {
+                    "HostedZoneId": "Z26RNL4JYFTOTI",
+                    "DNSName": "a7cfca60b881d452dad959d096132811-c3c4d636d52e1f40.elb.us-east-1.amazonaws.com.",
+                    "EvaluateTargetHealth": true
+                }
+            }
+        },
+        {
+            "Action": "UPSERT",
+            "ResourceRecordSet": {
+                "Name": "use2.rideshare.lukmonadeokun.com",
+                "Type": "A",
+                "AliasTarget": {
+                    "HostedZoneId": "ZLMOA37VPKANP",
+                    "DNSName": "ab644eb0ac16c4b898e0d80dd6311146-af327cff475e10b4.elb.us-east-2.amazonaws.com.",
+                    "EvaluateTargetHealth": true
+                }
+            }
+        }
+    ]
+}
