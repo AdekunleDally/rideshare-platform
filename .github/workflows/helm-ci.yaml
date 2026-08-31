@@ -30,6 +30,14 @@ jobs:
             - name: Verify Helm installation
               run: helm version --short
 
+            - name: Set up Kubeconform
+              uses: bmuschko/setup-kubeconform@v1
+              with:
+                  kubeconform-version: "0.8.0"
+
+            - name: Verify Kubeconform installation
+              run: kubeconform -v
+
             - name: Build Helm dependencies
               run: |
                   helm dependency build applications/rideshare
@@ -63,3 +71,19 @@ jobs:
                       --namespace rideshare \
                       -f applications/rideshare/values-us-east-2.yaml \
                       > /tmp/rideshare-use2.yaml
+
+            - name: Validate us-east-1 Kubernetes manifests
+              run: |
+                  kubeconform \
+                    -strict \
+                    -summary \
+                    -kubernetes-version 1.36.0 \
+                    /tmp/rideshare-use1.yaml
+
+            - name: Validate us-east-2 Kubernetes manifests
+              run: |
+                  kubeconform \
+                    -strict \
+                    -summary \
+                    -kubernetes-version 1.36.0 \
+                    /tmp/rideshare-use2.yaml
