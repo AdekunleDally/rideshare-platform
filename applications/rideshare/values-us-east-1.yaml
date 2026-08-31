@@ -29,15 +29,15 @@ rider-service:
     REDIS_PORT: "6379"
     REDIS_TLS: "true"
 
-trip-service:
-  image:
-    repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/trip-service
-    tag: "1.8"
-
 matching-service:
   image:
     repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/matching-service
     tag: "1.9"
+
+trip-service:
+  image:
+    repository: 287872994236.dkr.ecr.us-east-1.amazonaws.com/rideshare/trip-service
+    tag: "1.8"
 
   config:
     TRIP_SERVICE_URL: "http://trip-service:3005"
