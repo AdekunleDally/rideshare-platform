@@ -1,0 +1,65 @@
+name: Helm CI
+
+on:
+    pull_request:
+        branches:
+            - main
+    push:
+        branches:
+            - main
+
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+jobs:
+    helm-validation:
+        name: Validate Rideshare Helm Chart
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Set up Helm
+              uses: azure/setup-helm@v4
+              with:
+                  version: v3.17.2
+
+            - name: Verify Helm installation
+              run: helm version --short
+
+            - name: Build Helm dependencies
+              run: |
+                  helm dependency build applications/rideshare
+
+            - name: Lint us-east-1 configuration
+              run: |
+                  helm lint \
+                      applications/rideshare \
+                      -f applications/rideshare/values-us-east-1.yaml
+
+            - name: Lint us-east-2 configuration
+              run: |
+                  helm lint \
+                      applications/rideshare \
+                      -f applications/rideshare/values-us-east-2.yaml
+
+            - name: Render us-east-1 manifests
+              run: |
+                  helm template \
+                      rideshare \
+                      applications/rideshare \
+                      --namespace rideshare \
+                      -f applications/rideshare/values-us-east-1.yaml \
+                      > /tmp/rideshare-use1.yaml
+
+            - name: Render us-east-2 manifests
+              run: |
+                  helm template \
+                      rideshare \
+                      applications/rideshare \
+                      --namespace rideshare \
+                      -f applications/rideshare/values-us-east-2.yaml \
+                      > /tmp/rideshare-use2.yaml
