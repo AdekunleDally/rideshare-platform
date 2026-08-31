@@ -10,7 +10,7 @@
             "Condition": {
                 "StringEquals": {
                     "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
-                    "token.actions.githubusercontent.com:sub": "repo:AdekunleDally/rideshare-platform:ref:refs/heads/ci/add-aws-oidc-auth"
+                    "token.actions.githubusercontent.com:sub": "repo:AdekunleDally@23556212/rideshare-platform@1312860132:ref:refs/heads/ci/add-aws-oidc-auth"
                 }
             }
         }
