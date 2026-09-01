@@ -37,7 +37,7 @@ jobs:
 
             - name: Verify target cluster
               run: |
-                  kubectl config current context
+                  kubectl config current-context
                   kubectl get namespace rideshare
 
             - name: Build Helm dependencies
