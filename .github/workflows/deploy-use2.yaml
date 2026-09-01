@@ -61,7 +61,7 @@ jobs:
             - name: Verify Workloads
               run: |
                   kubectl get deployments \
-                    -namespace rideshare
+                    --namespace rideshare
 
                   kubectl get pods \
                     --namespace rideshare
