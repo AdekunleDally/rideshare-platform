@@ -84,13 +84,13 @@ jobs:
                   --namespace rideshare \
                   --timeout=5m
 
-                          - name: Verify Workloads
-                          run: |
-                              kubectl get deployments \
-                                  --namespace rideshare
+            - name: Verify Workloads
+              run: |
+                  kubectl get deployments \
+                  --namespace rideshare
 
-                              kubectl get pods \
-                                  --namespace rideshare
+                  kubectl get pods \
+                  --namespace rideshare
 
             - name: Verify regional application health
               run: |
