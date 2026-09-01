@@ -1,0 +1,47 @@
+name: EKS use2 Access Test
+
+on:
+    workflow_dispatch:
+
+permissions:
+    id-token: write
+    contents: read
+
+jobs:
+    eks-access-test:
+        name: Test use2 EKS Access
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v6.2.3
+              with:
+                  role-to-assume: arn:aws:iam::287872994236:role/rideshare-github-actions-role
+                  aws-region: us-east-2
+                  allowed-account-ids: "287872994236"
+
+            - name: Verify AWS identity
+              run: aws sts get-caller-identity
+
+            - name: Configure use2 kubeconfig
+              run: |
+                  aws eks update-kubeconfig \
+                    --name rideshare-prod-use2 \
+                    --region us-east-2
+
+            - name: Verify Kubernetes authorization
+              run: |
+                  kubectl auth can-i get pods -n rideshare
+                  kubectl auth can-i create deployments -n rideshare
+                  kubectl auth can-i patch deployments -n rideshare
+
+            - name: Inspect rideshare namespace
+              run: |
+                  kubectl get pods -n rideshare
+                  kubectl get deployments -n rideshare
+
+            - name: Inspect Helm release
+              run: helm list -n rideshare
