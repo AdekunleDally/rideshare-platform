@@ -58,10 +58,46 @@ jobs:
                   helm status rideshare \
                     --namespace rideshare
 
-            - name: Verify Workloads
+            - name: Verify application rollouts
               run: |
-                  kubectl get deployments \
-                    --namespace rideshare
+                  kubectl rollout status deployment/driver-service \
+                  --namespace rideshare \
+                  --timeout=5m
 
-                  kubectl get pods \
-                    --namespace rideshare
+                  kubectl rollout status deployment/email-service \
+                  --namespace rideshare \
+                  --timeout=5m
+
+                  kubectl rollout status deployment/frontend \
+                  --namespace rideshare \
+                  --timeout=5m
+
+                  kubectl rollout status deployment/matching-service \
+                  --namespace rideshare \
+                  --timeout=5m
+
+                  kubectl rollout status deployment/rider-service \
+                  --namespace rideshare \
+                  --timeout=5m
+
+                  kubectl rollout status deployment/trip-service \
+                  --namespace rideshare \
+                  --timeout=5m
+
+                          - name: Verify Workloads
+                          run: |
+                              kubectl get deployments \
+                                  --namespace rideshare
+
+                              kubectl get pods \
+                                  --namespace rideshare
+
+            - name: Verify regional application health
+              run: |
+                  curl \
+                  --fail \
+                  --silent \
+                  --show-error \
+                  --retry 5 \
+                  --retry-delay 10 \
+                  https://use2.rideshare.lukmonadeokun.com/application-healthz
