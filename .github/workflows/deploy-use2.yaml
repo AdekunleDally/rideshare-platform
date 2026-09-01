@@ -1,0 +1,67 @@
+name: Deploy Rideshare to us-east-2
+
+on: workflow_dispatch
+
+permissions:
+    id-token: write
+    contents: read
+
+concurrency:
+    group: rideshare-use2-deployment
+    cancel-in-progress: false
+
+jobs:
+    deploy:
+        name: Deploy to us-east-2
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v6.2.3
+              with:
+                  role-to-assume: arn:aws:iam::287872994236:role/rideshare-github-actions-role
+                  aws-region: us-east-2
+                  allowed-account-ids: "287872994236"
+
+            - name: verify AWS Identity
+              run: aws sts get-caller-identity
+
+            - name: Configure us-east-2 kubeconfig
+              run: |
+                  aws eks update-kubeconfig \
+                    --name rideshare-prod-use2 \
+                    --region us-east-2
+
+            - name: Verify target cluster
+              run: |
+                  kubectl config current context
+                  kubectl get namespace rideshare
+
+            - name: Build Helm dependencies
+              run: |
+                  helm dependency build applications/rideshare
+
+            - name: Deploy Rideshare
+              run: |
+                  helm upgrade --install rideshare \
+                    applications/rideshare \
+                    --namespace rideshare \
+                    -f applications/rideshare/values-us-east-2.yaml \
+                    --wait \
+                    --timeout 10m
+
+            - name: Verify Helm release
+              run: |
+                  helm status rideshare \
+                    -namespace rideshare
+
+            - name: Verify Workloads
+              run: |
+                  kubectl get deployments \
+                    -namespace rideshare
+
+                  kubectl get pods \
+                    --namespace rideshare
