@@ -56,7 +56,7 @@ jobs:
             - name: Verify Helm release
               run: |
                   helm status rideshare \
-                    -namespace rideshare
+                    --namespace rideshare
 
             - name: Verify Workloads
               run: |
