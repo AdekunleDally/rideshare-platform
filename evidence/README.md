@@ -17,6 +17,10 @@ The dated baseline output is stored in:
 It includes AWS, EKS, workloads, networking, identity, CloudNativePG, Redis,
 storage, certificates and External Secrets information.
 
+## Application Delivery Evidence
+
+- [2026-09-02 Multi-Region Continuous Delivery Validation](./application-validation/2026-09-02-multi-region-cd-validation.md) — successful gated deployment to `rideshare-prod-use1`, deployment to `rideshare-prod-use2`, Kubernetes rollout validation, and regional and production health checks.
+
 ## Required Evidence Structure
 
 ```text
