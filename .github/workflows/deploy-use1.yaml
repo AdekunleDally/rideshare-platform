@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
     deploy:
-        name: Deploy to use1 production
+        name: Deploy to use1
         runs-on: ubuntu-latest
 
         environment:
@@ -41,7 +41,10 @@ jobs:
 
             - name: Verify target cluster
               run: |
+                  echo "Current Kubernetes context:"
                   kubectl config current-context
+
+                  echo "Verifying rideshare namespace:"
                   kubectl get namespace rideshare
 
             - name: Build Helm dependencies
@@ -105,3 +108,13 @@ jobs:
                     --retry 5 \
                     --retry-delay 10 \
                     https://use1.rideshare.lukmonadeokun.com/application-healthz
+
+            - name: Verify production application health
+              run: |
+                  curl \
+                    --fail \
+                    --silent \
+                    --show-error \
+                    --retry 5 \
+                    --retry-delay 10 \
+                    https://rideshare.lukmonadeokun.com/application-healthz
