@@ -1,0 +1,13 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "DescribeUse1Cluster",
+            "Effect": "Allow",
+            "Action": [
+                "eks:DescribeCluster"
+            ],
+            "Resource": "arn:aws:eks:us-east-1:287872994236:cluster/rideshare-prod-use1"
+        }
+    ]
+}
