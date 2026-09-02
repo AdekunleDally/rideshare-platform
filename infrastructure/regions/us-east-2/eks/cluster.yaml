@@ -50,7 +50,7 @@ managedNodeGroups:
       Region: us-east-2
       NodeGroup: system
       k8s.io/cluster-autoscaler/enabled: "true"
-      k8s.io/cluster-autoscaler/rideshare-prod-use1: "owned"
+      k8s.io/cluster-autoscaler/rideshare-prod-use2: "owned"
 
   - name: application-ng
 
