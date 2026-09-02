@@ -1,0 +1,107 @@
+name: Deploy RideShare to use1
+
+on:
+    workflow_dispatch:
+
+permissions:
+    id-token: write
+    contents: read
+
+concurrency:
+    group: rideshare-use1-production-deployment
+    cancel-in-progress: false
+
+jobs:
+    deploy:
+        name: Deploy to use1 production
+        runs-on: ubuntu-latest
+
+        environment:
+            name: production-use1
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v6.2.3
+              with:
+                  role-to-assume: arn:aws:iam::287872994236:role/rideshare-github-actions-role
+                  aws-region: us-east-1
+                  allowed-account-ids: "287872994236"
+
+            - name: Verify AWS identity
+              run: aws sts get-caller-identity
+
+            - name: Configure use1 kubeconfig
+              run: |
+                  aws eks update-kubeconfig \
+                    --name rideshare-prod-use1 \
+                    --region us-east-1
+
+            - name: Verify target cluster
+              run: |
+                  kubectl config current-context
+                  kubectl get namespace rideshare
+
+            - name: Build Helm dependencies
+              run: |
+                  helm dependency build applications/rideshare
+
+            - name: Deploy RideShare
+              run: |
+                  helm upgrade --install rideshare \
+                    applications/rideshare \
+                    --namespace rideshare \
+                    -f applications/rideshare/values-us-east-1.yaml \
+                    --wait \
+                    --timeout 10m
+
+            - name: Verify Helm release
+              run: |
+                  helm status rideshare \
+                    --namespace rideshare
+
+            - name: Verify application rollouts
+              run: |
+                  kubectl rollout status deployment/driver-service \
+                    --namespace rideshare \
+                    --timeout=5m
+
+                  kubectl rollout status deployment/email-service \
+                    --namespace rideshare \
+                    --timeout=5m
+
+                  kubectl rollout status deployment/frontend \
+                    --namespace rideshare \
+                    --timeout=5m
+
+                  kubectl rollout status deployment/matching-service \
+                    --namespace rideshare \
+                    --timeout=5m
+
+                  kubectl rollout status deployment/rider-service \
+                    --namespace rideshare \
+                    --timeout=5m
+
+                  kubectl rollout status deployment/trip-service \
+                    --namespace rideshare \
+                    --timeout=5m
+
+            - name: Verify workloads
+              run: |
+                  kubectl get deployments \
+                    --namespace rideshare
+
+                  kubectl get pods \
+                    --namespace rideshare
+
+            - name: Verify regional application health
+              run: |
+                  curl \
+                    --fail \
+                    --silent \
+                    --show-error \
+                    --retry 5 \
+                    --retry-delay 10 \
+                    https://use1.rideshare.lukmonadeokun.com/application-healthz
