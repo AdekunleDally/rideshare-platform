@@ -80,11 +80,11 @@ The architecture retains:
 
 The principal infrastructure changes are:
 
-- CloudNativePG → Amazon RDS for PostgreSQL
-- Opstree Redis Operator → Amazon ElastiCache
-- legacy cluster configuration → standardised regional configuration
-- manually accumulated infrastructure → reproducible platform definitions
-- single-region operation → multi-region architecture
+- CloudNativePG â†’ Amazon RDS for PostgreSQL
+- Opstree Redis Operator â†’ Amazon ElastiCache
+- legacy cluster configuration â†’ standardised regional configuration
+- manually accumulated infrastructure â†’ reproducible platform definitions
+- single-region operation â†’ multi-region architecture
 
 Route 53 provides the DNS layer for the multi-region application endpoint, while application-level health checks are used to determine whether a regional application path is healthy.
 
@@ -206,29 +206,29 @@ Regional differences should be expressed through environment-specific configurat
 
 ```text
 rideshare-platform/
-│
-├── applications/
-│   └── RideShare Helm charts and regional application configuration
-│
-├── docs/
-│   ├── architecture/
-│   ├── governance/
-│   └── engineering-journey.md
-│
-├── infrastructure/
-│   └── AWS/EKS definitions and infrastructure assessments
-│
-├── platform/
-│   └── Shared Kubernetes platform components
-│
-├── operations/
-│   └── Operational procedures and runbooks
-│
-├── scripts/
-│   └── Deployment, migration and validation automation
-│
-└── evidence/
-    └── Implementation and validation evidence
+â”‚
+â”œâ”€â”€ applications/
+â”‚   â””â”€â”€ RideShare Helm charts and regional application configuration
+â”‚
+â”œâ”€â”€ docs/
+â”‚   â”œâ”€â”€ architecture/
+â”‚   â”œâ”€â”€ governance/
+â”‚   â””â”€â”€ engineering-journey.md
+â”‚
+â”œâ”€â”€ infrastructure/
+â”‚   â””â”€â”€ AWS/EKS definitions and infrastructure assessments
+â”‚
+â”œâ”€â”€ platform/
+â”‚   â””â”€â”€ Shared Kubernetes platform components
+â”‚
+â”œâ”€â”€ operations/
+â”‚   â””â”€â”€ Operational procedures and runbooks
+â”‚
+â”œâ”€â”€ scripts/
+â”‚   â””â”€â”€ Deployment, migration and validation automation
+â”‚
+â””â”€â”€ evidence/
+    â””â”€â”€ Implementation and validation evidence
 ```
 
 ### `applications/`
@@ -293,16 +293,16 @@ For example:
 
 ```text
 applications/rideshare/
-├── Chart.yaml
-├── values.yaml
-├── values-us-east-1.yaml
-└── charts/
-    ├── driver-service/
-    ├── email-service/
-    ├── frontend/
-    ├── matching-service/
-    ├── rider-service/
-    └── trip-service/
+â”œâ”€â”€ Chart.yaml
+â”œâ”€â”€ values.yaml
+â”œâ”€â”€ values-us-east-1.yaml
+â””â”€â”€ charts/
+    â”œâ”€â”€ driver-service/
+    â”œâ”€â”€ email-service/
+    â”œâ”€â”€ frontend/
+    â”œâ”€â”€ matching-service/
+    â”œâ”€â”€ rider-service/
+    â””â”€â”€ trip-service/
 ```
 
 The platform repository does not build these applications.
@@ -427,6 +427,10 @@ The complete validation approach is documented in the [Validation Plan](./docs/a
 
 A phase is considered complete when its implementation and required validation have been completed and the relevant evidence has been recorded.
 
+The multi-region continuous-delivery milestone in Phase 3 is complete. GitHub Actions now performs controlled Helm deployments to `rideshare-prod-use1` and `rideshare-prod-use2`, validates the Kubernetes rollouts and workloads, and checks both regional and production application health endpoints. The use1 path is protected by the `production-use1` GitHub Environment approval gate. See the [multi-region CD validation record](./evidence/application-validation/2026-09-02-multi-region-cd-validation.md).
+
+Phase 3 remains in progress until its remaining exit criteria, including deployment rollback validation, have been completed and evidenced.
+
 See the [Platform Evolution Roadmap](./docs/architecture/platform-evolution-roadmap/platform-roadmap.md) for the implementation sequence.
 
 ---
@@ -452,10 +456,6 @@ The [Engineering Traceability Matrix](./docs/engineering-traceability.md) connec
 
 ## Current Direction
 
-The immediate focus is the completion and validation of the `rideshare-prod-use1` platform in `us-east-1`.
+Both production regions now use the same controlled Helm delivery model, with successful post-deployment validation recorded for `rideshare-prod-use1` and `rideshare-prod-use2`.
 
-This includes completing the transition from Kubernetes-hosted stateful services to Amazon RDS and Amazon ElastiCache, validating application behaviour against the managed services, removing superseded platform components, and ensuring the resulting environment can be reproduced from the repository.
-
-Once the regional implementation has been validated, the same platform standards will be applied to `us-east-2` as `rideshare-prod-use2`.
-
-The result will be two regional environments built from the same engineering standards and deployment model, providing the foundation for controlled multi-region traffic management, operational validation and resilience testing.
+The immediate focus is completing the remaining Phase 3 automation criteria, beginning with documented and validated deployment rollback behaviour. After Phase 3 is complete, work proceeds to Phase 4 observability, operational readiness and regional resilience testing.
