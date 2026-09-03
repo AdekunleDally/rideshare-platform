@@ -125,6 +125,27 @@ Administrative access to Grafana was validated using Kubernetes port
 forwarding and the generated password stored in the Kubernetes Secret. The
 password is not stored in the repository.
 
+## Visual Evidence
+
+### Grafana Cluster Overview
+
+The Grafana cluster dashboard displays CPU, memory, workload and pod metrics
+collected from `rideshare-prod-use1`.
+
+![use1 Grafana cluster overview](screenshots/us-east-1/grafana-use1.png)
+
+### Prometheus Target Health
+
+Prometheus reported 27 healthy targets and no unhealthy targets.
+
+![us-east-1 Prometheus targets](screenshots/us-east-1/prometheus-use1.png)
+
+### Alert Status
+
+The only firing alert was the intentionally active `Watchdog` alert.
+
+![us-east-1 Prometheus alerts](screenshots/us-east-1/prometheus-alert-use1.png)
+
 ## Result
 
 The `use1` (us-east-1) monitoring foundation was deployed successfully and passed its

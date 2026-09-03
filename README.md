@@ -459,3 +459,20 @@ The [Engineering Traceability Matrix](./docs/engineering-traceability.md) connec
 Both production regions now use the same controlled Helm delivery model, with successful post-deployment validation recorded for `rideshare-prod-use1` and `rideshare-prod-use2`.
 
 The immediate focus is completing the remaining Phase 3 automation criteria, beginning with documented and validated deployment rollback behaviour. After Phase 3 is complete, work proceeds to Phase 4 observability, operational readiness and regional resilience testing.
+
+### Multi-Region Monitoring
+
+Prometheus and Grafana monitor both production EKS regions independently.
+Each regional stack collects Kubernetes, node and RideShare workload metrics.
+### use1 — us-east-1
+![us-east-1 Grafana cluster overview](./evidence/observability/screenshots/us-east-1/grafana-use1.png)
+
+
+### use2 — us-east-2
+![us-east-2 Grafana cluster overview](./evidence/observability/screenshots/us-east-2/grafana-use2.png)
+
+
+## Detailed evidence:
+
+- [use1 monitoring validation](evidence/observability/2026-09-03-use1-monitoring-foundation.md)
+- [use2 monitoring validation](evidence/observability/2026-09-03-use2-monitoring-foundation.md)
