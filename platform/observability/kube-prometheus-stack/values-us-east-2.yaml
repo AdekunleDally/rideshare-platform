@@ -1,0 +1,186 @@
+# kube-prometheus-stack configuration for rideshare-prod-use2.
+# Chart: prometheus-community/kube-prometheus-stack
+# Chart version: 88.6.3
+
+defaultRules:
+  create: true
+
+# These control-plane components are managed by AWS EKS and are not directly
+# available for scraping from within the cluster.
+kubeControllerManager:
+  enabled: false
+
+kubeScheduler:
+  enabled: false
+
+kubeEtcd:
+  enabled: false
+
+kubeProxy:
+  enabled: false
+
+alertmanager:
+  enabled: true
+
+  alertmanagerSpec:
+    replicas: 1
+    retention: 120h
+
+    nodeSelector:
+      workload-type: platform
+
+    tolerations:
+      - key: workload-type
+        operator: Equal
+        value: platform
+        effect: NoSchedule
+
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
+
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: gp3
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 2Gi
+
+grafana:
+  enabled: true
+
+  # Keep Grafana private during the initial deployment.
+  ingress:
+    enabled: false
+
+  service:
+    type: ClusterIP
+
+  defaultDashboardsEnabled: true
+  defaultDashboardsTimezone: browser
+
+  nodeSelector:
+    workload-type: platform
+
+  tolerations:
+    - key: workload-type
+      operator: Equal
+      value: platform
+      effect: NoSchedule
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+  persistence:
+    enabled: true
+    storageClassName: gp3
+    accessModes:
+      - ReadWriteOnce
+    size: 5Gi
+
+kube-state-metrics:
+  nodeSelector:
+    workload-type: platform
+
+  tolerations:
+    - key: workload-type
+      operator: Equal
+      value: platform
+      effect: NoSchedule
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+
+prometheus-node-exporter:
+  # Node Exporter must run on application and platform nodes.
+  # This toleration allows it onto the tainted platform nodes without
+  # restricting it from the untainted application nodes.
+  tolerations:
+    - key: workload-type
+      operator: Equal
+      value: platform
+      effect: NoSchedule
+
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+
+prometheusOperator:
+  enabled: true
+
+  nodeSelector:
+    workload-type: platform
+
+  tolerations:
+    - key: workload-type
+      operator: Equal
+      value: platform
+      effect: NoSchedule
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 256Mi
+
+prometheus:
+  enabled: true
+
+  service:
+    type: ClusterIP
+
+  prometheusSpec:
+    replicas: 1
+
+    retention: 7d
+    retentionSize: 16GB
+
+    nodeSelector:
+      workload-type: platform
+
+    tolerations:
+      - key: workload-type
+        operator: Equal
+        value: platform
+        effect: NoSchedule
+
+    resources:
+      requests:
+        cpu: 300m
+        memory: 1Gi
+      limits:
+        cpu: 1000m
+        memory: 2Gi
+
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: gp3
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 20Gi
